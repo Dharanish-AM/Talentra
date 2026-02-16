@@ -1,0 +1,13 @@
+const express = require("express");
+const router = express.Router();
+const recruiterController = require("../controllers/recruiter.controller");
+const { authenticate, authorize } = require("../middleware/auth");
+
+router.use(authenticate);
+router.use(authorize("recruiter"));
+
+router.get("/candidates", recruiterController.getCandidates);
+router.post("/feedback/:id", recruiterController.submitFeedback);
+router.put("/candidates/:id/result", recruiterController.updateCandidateResult);
+
+module.exports = router;

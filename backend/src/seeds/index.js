@@ -1,5 +1,4 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
 const connectDB = require("../config/database");
 const logger = require("../config/logger");
 const User = require("../models/User");
@@ -191,7 +190,7 @@ const seedData = async () => {
     ]);
 
     logger.info("Creating applications...");
-    const applications = await Application.create([
+    await Application.create([
       {
         studentId: users[0]._id,
         studentName: users[0].name,

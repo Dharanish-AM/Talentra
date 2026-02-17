@@ -28,11 +28,20 @@ export default function CompaniesPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {companies.map((company, i) => {
           const companyDrives = drives.filter((d) => {
-            const driveCompanyId =
-              typeof d.companyId === "object"
-                ? (d.companyId as any).id || (d.companyId as any)._id
-                : d.companyId;
-            const targetCompanyId = company.id || (company as any)._id;
+            const getDriveCompanyId = (
+              id: string | { _id: string; id?: string },
+            ) => {
+              if (typeof id === "object" && id !== null) {
+                return id.id || id._id;
+              }
+              return id;
+            };
+
+            const driveCompanyId = getDriveCompanyId(
+              d.companyId as unknown as string | { _id: string; id?: string },
+            );
+            const targetCompanyId = company.id;
+
             return String(driveCompanyId) === String(targetCompanyId);
           });
           return (

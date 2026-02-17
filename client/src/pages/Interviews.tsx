@@ -44,11 +44,27 @@ export default function InterviewsPage() {
             style={{ animationDelay: `${i * 80}ms` }}
           >
             <div className="flex items-start justify-between">
-              <div>
-                <p className="font-display text-base font-semibold text-foreground">
-                  {interview.studentName}
-                </p>
-                <p className="text-sm text-muted-foreground">
+              <div className="flex-1">
+                {isRecruiter || user?.role === "admin" ? (
+                  <>
+                    <p className="font-display text-base font-semibold text-foreground">
+                      {interview.studentName}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {interview.driveTitle} • {interview.companyName}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="font-display text-base font-semibold text-foreground">
+                      {interview.companyName}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {interview.role} • {interview.driveTitle}
+                    </p>
+                  </>
+                )}
+                <p className="mt-1 text-xs text-muted-foreground">
                   {formatDate(interview.date)} · {interview.time}
                 </p>
               </div>

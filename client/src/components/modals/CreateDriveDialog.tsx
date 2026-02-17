@@ -198,7 +198,9 @@ export default function CreateDriveDialog({ open, onOpenChange }: Props) {
               <Label>Status</Label>
               <Select
                 value={form.status}
-                onValueChange={(v: any) => setForm({ ...form, status: v })}
+                onValueChange={(v: "upcoming" | "active") =>
+                  setForm({ ...form, status: v })
+                }
               >
                 <SelectTrigger>
                   <SelectValue />

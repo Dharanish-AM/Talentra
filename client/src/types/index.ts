@@ -1,6 +1,12 @@
-export type UserRole = 'student' | 'admin' | 'recruiter';
+export type UserRole = "student" | "admin" | "recruiter";
 
-export type ApplicationStatus = 'applied' | 'shortlisted' | 'interview' | 'selected' | 'rejected' | 'offer';
+export type ApplicationStatus =
+  | "applied"
+  | "shortlisted"
+  | "interview"
+  | "selected"
+  | "rejected"
+  | "offer";
 
 export interface User {
   id: string;
@@ -48,7 +54,7 @@ export interface JobDrive {
   eligibility: EligibilityCriteria;
   deadline: string;
   driveDate: string;
-  status: 'upcoming' | 'active' | 'completed';
+  status: "upcoming" | "active" | "completed";
   applicantCount: number;
 }
 
@@ -69,18 +75,22 @@ export interface InterviewSlot {
   driveId: string;
   studentId: string;
   studentName: string;
+  studentEmail: string;
+  driveTitle: string;
+  companyName: string;
+  role: string;
   date: string;
   time: string;
-  mode: 'online' | 'offline';
+  mode: "online" | "offline";
   link?: string;
   feedback?: string;
-  result?: 'selected' | 'rejected' | 'pending';
+  result?: "selected" | "rejected" | "pending";
 }
 
 export interface StatCard {
   label: string;
   value: string | number;
   change?: string;
-  trend?: 'up' | 'down' | 'neutral';
+  trend?: "up" | "down" | "neutral";
   icon?: string;
 }

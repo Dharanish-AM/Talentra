@@ -152,13 +152,14 @@ const scheduleInterviews = async (interviewData) => {
 
 const getAllInterviews = async () => {
   const interviews = await Interview.find()
-    .populate("driveId", "companyName role")
+    .populate("driveId", "companyName role title")
     .sort("date time");
 
   return interviews.map((interview) => ({
     ...interview.toObject(),
     companyName: interview.driveId?.companyName || "Unknown",
     role: interview.driveId?.role || "Unknown",
+    driveTitle: interview.driveId?.title || "Unknown Drive",
   }));
 };
 

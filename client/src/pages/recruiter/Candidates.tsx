@@ -17,26 +17,10 @@ export default function RecruiterCandidates() {
     useState<InterviewSlot | null>(null);
 
   const filtered = interviews.filter((i) => {
-    const matchSearch =
-      i.studentName.toLowerCase().includes(search.toLowerCase()) ||
-      (i.driveId as any)?.title?.toLowerCase().includes(search.toLowerCase()); // Handle nested object if not flattened yet, or string if flattened
-    // Note: DataStore might return flattened or nested depending on API.
-    // The backend fix flattens it, but type might define driveId as string.
-    // We'll rely on our updated backend which returns studentName, etc.
-    // BUT WAIT, `InterviewSlot` type says `driveId: string`.
-    // The backend populate puts an object there, or we flattened it to `driveTitle`.
-    // Let's use `driveTitle` or `title` if available securely.
-
-    // Actually, in `recruiter.service.js` I added `driveTitle` and `companyName`.
-    // The `InterviewSlot` interface in `types/index.ts` has `driveId: string`.
-    // I should cast or check safely.
-
-    const driveName =
-      (i as any).driveTitle || (i as any).driveId?.title || "Unknown Drive";
-
     return (
       (i.studentName.toLowerCase().includes(search.toLowerCase()) ||
-        driveName.toLowerCase().includes(search.toLowerCase())) &&
+        i.driveTitle.toLowerCase().includes(search.toLowerCase()) ||
+        i.companyName.toLowerCase().includes(search.toLowerCase())) &&
       (statusFilter === "all" || (i.result || "pending") === statusFilter)
     );
   });
@@ -116,16 +100,14 @@ export default function RecruiterCandidates() {
                     {interview.studentName}
                   </div>
                   <div className="text-xs text-muted-foreground">
-                    {(interview as any).studentEmail}
+                    {interview.studentEmail}
                   </div>
                 </td>
                 <td className="px-6 py-4 text-sm text-muted-foreground">
                   <div className="font-medium text-foreground">
-                    {(interview as any).driveTitle || "Drive"}
+                    {interview.driveTitle}
                   </div>
-                  <div className="text-xs">
-                    {(interview as any).companyName || "Company"}
-                  </div>
+                  <div className="text-xs">{interview.companyName}</div>
                 </td>
                 <td className="px-6 py-4 text-sm text-muted-foreground">
                   <div>

@@ -5,7 +5,7 @@ const ApiError = require("../utils/ApiError");
 const getCandidates = async () => {
   const interviews = await Interview.find()
     .populate("studentId", "name email")
-    .populate("driveId", "title companyName")
+    .populate("driveId", "title companyName role")
     .sort("date");
 
   return interviews.map((interview) => ({
@@ -14,6 +14,7 @@ const getCandidates = async () => {
     studentEmail: interview.studentId?.email || "Unknown",
     driveTitle: interview.driveId?.title || "Unknown Drive",
     companyName: interview.driveId?.companyName || "Unknown Company",
+    role: interview.driveId?.role || "Unknown Role",
   }));
 };
 

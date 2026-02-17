@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatDate } from "@/lib/utils";
 import { useDataStore } from "@/store/dataStore";
 import { useAuthStore } from "@/store/authStore";
 import PageHeader from "@/components/shared/PageHeader";
@@ -48,7 +49,7 @@ export default function InterviewsPage() {
                   {interview.studentName}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {interview.date} · {interview.time}
+                  {formatDate(interview.date)} · {interview.time}
                 </p>
               </div>
               <StatusBadge status={interview.result || "pending"} />

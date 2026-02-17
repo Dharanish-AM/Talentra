@@ -1,0 +1,193 @@
+import { useState } from "react";
+import { useDataStore } from "@/store/dataStore";
+import PageHeader from "@/components/shared/PageHeader";
+import StatusBadge from "@/components/shared/StatusBadge";
+import { Search } from "lucide-react";
+import { InterviewSlot } from "@/types";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
+import { formatDate } from "@/lib/utils";
+import FeedbackDialog from "@/components/modals/FeedbackDialog";
+
+export default function RecruiterCandidates() {
+  const { interviews, updateInterviewResult } = useDataStore();
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [feedbackInterview, setFeedbackInterview] =
+    useState<InterviewSlot | null>(null);
+
+  const filtered = interviews.filter((i) => {
+    const matchSearch =
+      i.studentName.toLowerCase().includes(search.toLowerCase()) ||
+      (i.driveId as any)?.title?.toLowerCase().includes(search.toLowerCase()); // Handle nested object if not flattened yet, or string if flattened
+    // Note: DataStore might return flattened or nested depending on API.
+    // The backend fix flattens it, but type might define driveId as string.
+    // We'll rely on our updated backend which returns studentName, etc.
+    // BUT WAIT, `InterviewSlot` type says `driveId: string`.
+    // The backend populate puts an object there, or we flattened it to `driveTitle`.
+    // Let's use `driveTitle` or `title` if available securely.
+
+    // Actually, in `recruiter.service.js` I added `driveTitle` and `companyName`.
+    // The `InterviewSlot` interface in `types/index.ts` has `driveId: string`.
+    // I should cast or check safely.
+
+    const driveName =
+      (i as any).driveTitle || (i as any).driveId?.title || "Unknown Drive";
+
+    return (
+      (i.studentName.toLowerCase().includes(search.toLowerCase()) ||
+        driveName.toLowerCase().includes(search.toLowerCase())) &&
+      (statusFilter === "all" || (i.result || "pending") === statusFilter)
+    );
+  });
+
+  const handleResult = (
+    interview: InterviewSlot,
+    result: "selected" | "rejected",
+  ) => {
+    updateInterviewResult(interview.id, result);
+    toast({
+      title: `Candidate ${result}`,
+      description: `${interview.studentName} has been ${result}.`,
+    });
+  };
+
+  return (
+    <div>
+      <PageHeader
+        title="Candidates"
+        description="Review and manage interview candidates."
+      />
+
+      <div className="mb-6 flex flex-wrap items-center gap-3">
+        <div className="relative flex-1 max-w-sm">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search by student or drive..."
+            className="w-full rounded-lg border border-input bg-background py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+          />
+        </div>
+        {["all", "pending", "selected", "rejected"].map((s) => (
+          <button
+            key={s}
+            onClick={() => setStatusFilter(s)}
+            className={`rounded-full px-3 py-1.5 text-xs font-semibold capitalize transition-colors ${
+              statusFilter === s
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:bg-muted/80"
+            }`}
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-border bg-card">
+        <table className="w-full">
+          <thead>
+            <tr className="border-b border-border bg-muted/50">
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Student
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Drive / Company
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Interview Details
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {filtered.map((interview) => (
+              <tr
+                key={interview.id}
+                className="transition-colors hover:bg-muted/30"
+              >
+                <td className="px-6 py-4">
+                  <div className="font-medium text-foreground">
+                    {interview.studentName}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {(interview as any).studentEmail}
+                  </div>
+                </td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">
+                  <div className="font-medium text-foreground">
+                    {(interview as any).driveTitle || "Drive"}
+                  </div>
+                  <div className="text-xs">
+                    {(interview as any).companyName || "Company"}
+                  </div>
+                </td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">
+                  <div>
+                    {formatDate(interview.date)} · {interview.time}
+                  </div>
+                  <div className="text-xs capitalize">{interview.mode}</div>
+                </td>
+                <td className="px-6 py-4">
+                  <StatusBadge status={interview.result || "pending"} />
+                </td>
+                <td className="px-6 py-4">
+                  <div className="flex gap-2">
+                    {interview.result === "pending" && (
+                      <>
+                        <Button
+                          size="sm"
+                          className="h-7 text-xs"
+                          onClick={() => handleResult(interview, "selected")}
+                        >
+                          Select
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          className="h-7 text-xs"
+                          onClick={() => handleResult(interview, "rejected")}
+                        >
+                          Reject
+                        </Button>
+                      </>
+                    )}
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-7 text-xs"
+                      onClick={() => setFeedbackInterview(interview)}
+                    >
+                      {interview.feedback ? "Edit Feedback" : "Feedback"}
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+            {filtered.length === 0 && (
+              <tr>
+                <td
+                  colSpan={5}
+                  className="px-6 py-12 text-center text-sm text-muted-foreground"
+                >
+                  No candidates match your filters.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <FeedbackDialog
+        open={!!feedbackInterview}
+        onOpenChange={() => setFeedbackInterview(null)}
+        interview={feedbackInterview}
+      />
+    </div>
+  );
+}

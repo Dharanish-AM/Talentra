@@ -12,6 +12,20 @@ const getCandidates = asyncHandler(async (req, res) => {
     );
 });
 
+const getShortlistedApplications = asyncHandler(async (req, res) => {
+  const applications = await recruiterService.getShortlistedApplications();
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { applications },
+        "Shortlisted applications retrieved successfully",
+      ),
+    );
+});
+
 const submitFeedback = asyncHandler(async (req, res) => {
   const interview = await recruiterService.submitFeedback(
     req.params.id,
@@ -39,6 +53,7 @@ const updateCandidateResult = asyncHandler(async (req, res) => {
 
 module.exports = {
   getCandidates,
+  getShortlistedApplications,
   submitFeedback,
   updateCandidateResult,
 };

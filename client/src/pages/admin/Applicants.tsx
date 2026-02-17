@@ -10,11 +10,17 @@ import { Application } from "@/types";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
-export default function ApplicantsPage() {
+interface ApplicantsPageProps {
+  initialFilter?: string;
+}
+
+export default function ApplicantsPage({
+  initialFilter = "all",
+}: ApplicantsPageProps) {
   const { user } = useAuthStore();
   const { applications, updateApplicationStatus } = useDataStore();
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState(initialFilter);
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
   const [scheduleApp, setScheduleApp] = useState<Application | null>(null);
 
@@ -60,6 +66,7 @@ export default function ApplicantsPage() {
           "shortlisted",
           "interview",
           "selected",
+          "offer",
           "rejected",
         ].map((s) => (
           <button
@@ -122,7 +129,7 @@ export default function ApplicantsPage() {
                     >
                       View
                     </Button>
-                    {/* Only admins can shortlist/reject */}
+
                     {user?.role === "admin" && app.status === "applied" && (
                       <>
                         <Button

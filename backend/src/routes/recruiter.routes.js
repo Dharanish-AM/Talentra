@@ -7,6 +7,10 @@ router.use(authenticate);
 router.use(authorize("recruiter"));
 
 router.get("/candidates", recruiterController.getCandidates);
+router.get(
+  "/applications/shortlisted",
+  recruiterController.getShortlistedApplications,
+);
 router.post("/feedback/:id", recruiterController.submitFeedback);
 router.put("/candidates/:id/result", recruiterController.updateCandidateResult);
 

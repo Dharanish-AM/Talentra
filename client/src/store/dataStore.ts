@@ -40,6 +40,7 @@ interface DataState {
   fetchInterviews: () => Promise<void>;
   fetchAllInterviews: () => Promise<void>;
   fetchStudentInterviews: () => Promise<void>;
+  fetchRecruiterApplications: () => Promise<void>;
   addInterview: (interview: Omit<InterviewSlot, "id">) => Promise<void>;
   updateInterviewResult: (
     id: string,
@@ -331,6 +332,22 @@ export const useDataStore = create<DataState>((set, get) => ({
     }
   },
 
+  fetchRecruiterApplications: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const applications = await recruiterApi.getShortlistedApplications();
+      set({ applications, isLoading: false });
+    } catch (error) {
+      set({
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch recruiter applications",
+        isLoading: false,
+      });
+    }
+  },
+
   addInterview: async (interview) => {
     set({ isLoading: true, error: null });
     try {
@@ -354,10 +371,16 @@ export const useDataStore = create<DataState>((set, get) => ({
   updateInterviewResult: async (id, result, feedback) => {
     set({ isLoading: true, error: null });
     try {
-      const updated = await recruiterApi.updateCandidateResult(id, result);
+      let updated: InterviewSlot;
+
+      // First update the status
+      updated = await recruiterApi.updateCandidateResult(id, result);
+
+      // Then update feedback if provided
       if (feedback) {
-        await recruiterApi.submitFeedback(id, feedback);
+        updated = await recruiterApi.submitFeedback(id, feedback);
       }
+
       set((s) => ({
         interviews: s.interviews.map((i) => (i.id === id ? updated : i)),
         isLoading: false,
@@ -370,6 +393,8 @@ export const useDataStore = create<DataState>((set, get) => ({
             : "Failed to update interview result",
         isLoading: false,
       });
+      // Optionally refresh data to ensure sync
+      get().fetchInterviews();
       throw error;
     }
   },

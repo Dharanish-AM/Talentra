@@ -35,7 +35,6 @@ const recruiterLinks = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/candidates", label: "Candidates", icon: UserCheck },
   { to: "/interviews", label: "Interviews", icon: Calendar },
-  { to: "/feedback", label: "Feedback", icon: ClipboardList },
 ];
 
 export default function AppSidebar() {

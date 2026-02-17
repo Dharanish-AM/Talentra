@@ -11,6 +11,7 @@ import StatusBadge from "@/components/shared/StatusBadge";
 import { Application } from "@/types";
 import { useDataStore } from "@/store/dataStore";
 import { toast } from "@/hooks/use-toast";
+import { formatDate } from "@/lib/utils";
 
 interface Props {
   open: boolean;
@@ -55,7 +56,8 @@ export default function ViewApplicantDialog({
             <StatusBadge status={application.status} />
           </div>
           <div className="text-xs text-muted-foreground">
-            Applied: {application.appliedAt} · Updated: {application.updatedAt}
+            Applied: {formatDate(application.appliedAt)} · Updated:{" "}
+            {formatDate(application.updatedAt)}
           </div>
         </div>
         <DialogFooter className="flex-wrap gap-2">

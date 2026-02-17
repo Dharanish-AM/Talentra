@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -53,17 +53,35 @@
     --info: 210 80% 52%;
     --info-foreground: 0 0% 100%;
 
-    --gradient-brand: linear-gradient(135deg, hsl(222 60% 22%), hsl(222 60% 32%));
-    --gradient-accent: linear-gradient(135deg, hsl(160 60% 40%), hsl(160 60% 50%));
-    --gradient-hero: linear-gradient(135deg, hsl(222 60% 16%), hsl(222 60% 26%), hsl(160 40% 30%));
+    --gradient-brand: linear-gradient(
+      135deg,
+      hsl(222 60% 22%),
+      hsl(222 60% 32%)
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      hsl(160 60% 40%),
+      hsl(160 60% 50%)
+    );
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(222 60% 16%),
+      hsl(222 60% 26%),
+      hsl(160 40% 30%)
+    );
 
     --shadow-sm: 0 1px 2px 0 hsl(222 60% 22% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(222 60% 22% / 0.08), 0 2px 4px -2px hsl(222 60% 22% / 0.05);
-    --shadow-lg: 0 10px 15px -3px hsl(222 60% 22% / 0.08), 0 4px 6px -4px hsl(222 60% 22% / 0.04);
-    --shadow-card: 0 1px 3px hsl(222 60% 22% / 0.06), 0 1px 2px hsl(222 60% 22% / 0.04);
+    --shadow-md:
+      0 4px 6px -1px hsl(222 60% 22% / 0.08),
+      0 2px 4px -2px hsl(222 60% 22% / 0.05);
+    --shadow-lg:
+      10px 15px -3px hsl(222 60% 22% / 0.08),
+      0 4px 6px -4px hsl(222 60% 22% / 0.04);
+    --shadow-card:
+      0 1px 3px hsl(222 60% 22% / 0.06), 0 1px 2px hsl(222 60% 22% / 0.04);
 
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-display: "Poppins", sans-serif;
+    --font-body: "Poppins", sans-serif;
   }
 
   .dark {
@@ -107,7 +125,12 @@
     font-family: var(--font-body);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
   }
 }

@@ -59,9 +59,18 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 8000;
 
-const server = app.listen(PORT, () => {
-  logger.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-});
+if (require.main === module) {
+  const server = app.listen(PORT, () => {
+    logger.info(
+      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`,
+    );
+  });
+
+  process.on("unhandledRejection", (err) => {
+    logger.error(`Unhandled Rejection: ${err.message}`);
+    server.close(() => process.exit(1));
+  });
+}
 
 process.on("unhandledRejection", (err) => {
   logger.error(`Unhandled Rejection: ${err.message}`);

@@ -15,6 +15,7 @@ export default function DashboardLayout() {
     fetchApplications,
     fetchStudentInterviews,
     fetchInterviews,
+    fetchRecruiterApplications,
   } = useDataStore();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function DashboardLayout() {
           fetchStudentInterviews(),
         ]);
       } else if (user.role === "recruiter") {
-        await fetchInterviews();
+        await Promise.all([fetchInterviews(), fetchRecruiterApplications()]);
       }
     };
 
@@ -50,6 +51,7 @@ export default function DashboardLayout() {
     fetchApplications,
     fetchStudentInterviews,
     fetchInterviews,
+    fetchRecruiterApplications,
   ]);
 
   return (

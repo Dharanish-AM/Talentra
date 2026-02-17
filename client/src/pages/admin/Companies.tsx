@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { useDataStore } from '@/store/dataStore';
-import PageHeader from '@/components/shared/PageHeader';
-import StatusBadge from '@/components/shared/StatusBadge';
-import { Plus, Globe } from 'lucide-react';
-import AddCompanyDialog from '@/components/modals/AddCompanyDialog';
-import DriveDetailDialog from '@/components/modals/DriveDetailDialog';
-import { JobDrive } from '@/types';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { useDataStore } from "@/store/dataStore";
+import PageHeader from "@/components/shared/PageHeader";
+import StatusBadge from "@/components/shared/StatusBadge";
+import { Plus, Globe } from "lucide-react";
+import AddCompanyDialog from "@/components/modals/AddCompanyDialog";
+import DriveDetailDialog from "@/components/modals/DriveDetailDialog";
+import { JobDrive } from "@/types";
+import { Button } from "@/components/ui/button";
 
 export default function CompaniesPage() {
   const { companies, drives } = useDataStore();
@@ -27,7 +27,14 @@ export default function CompaniesPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {companies.map((company, i) => {
-          const companyDrives = drives.filter((d) => d.companyId === company.id);
+          const companyDrives = drives.filter((d) => {
+            const driveCompanyId =
+              typeof d.companyId === "object"
+                ? (d.companyId as any).id || (d.companyId as any)._id
+                : d.companyId;
+            const targetCompanyId = company.id || (company as any)._id;
+            return String(driveCompanyId) === String(targetCompanyId);
+          });
           return (
             <div
               key={company.id}
@@ -37,11 +44,22 @@ export default function CompaniesPage() {
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 font-display text-lg font-bold text-primary">
                 {company.name.charAt(0)}
               </div>
-              <h3 className="font-display text-base font-semibold text-foreground">{company.name}</h3>
-              <p className="mt-1 text-xs font-medium text-accent">{company.industry}</p>
-              <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">{company.description}</p>
+              <h3 className="font-display text-base font-semibold text-foreground">
+                {company.name}
+              </h3>
+              <p className="mt-1 text-xs font-medium text-accent">
+                {company.industry}
+              </p>
+              <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">
+                {company.description}
+              </p>
               {company.website && (
-                <a href={company.website} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-xs text-primary hover:underline">
+                <a
+                  href={company.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                >
                   <Globe className="h-3 w-3" /> Website
                 </a>
               )}
@@ -54,7 +72,9 @@ export default function CompaniesPage() {
                         onClick={() => setSelectedDrive(d)}
                         className="flex w-full items-center justify-between rounded-lg border border-border px-3 py-2 text-left text-xs hover:bg-muted transition-colors"
                       >
-                        <span className="font-medium text-foreground">{d.role}</span>
+                        <span className="font-medium text-foreground">
+                          {d.role}
+                        </span>
                         <StatusBadge status={d.status} />
                       </button>
                     ))}
@@ -69,7 +89,11 @@ export default function CompaniesPage() {
       </div>
 
       <AddCompanyDialog open={showAdd} onOpenChange={setShowAdd} />
-      <DriveDetailDialog open={!!selectedDrive} onOpenChange={() => setSelectedDrive(null)} drive={selectedDrive} />
+      <DriveDetailDialog
+        open={!!selectedDrive}
+        onOpenChange={() => setSelectedDrive(null)}
+        drive={selectedDrive}
+      />
     </div>
   );
 }

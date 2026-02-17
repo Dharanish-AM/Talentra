@@ -1,5 +1,5 @@
 import { api, handleApiError } from "./api";
-import { InterviewSlot } from "@/types";
+import { InterviewSlot, Application } from "@/types";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -18,6 +18,17 @@ export const recruiterApi = {
         ApiResponse<{ candidates: InterviewSlot[] }>
       >("/recruiter/candidates");
       return response.data.data.candidates;
+    } catch (error) {
+      throw new Error(handleApiError(error));
+    }
+  },
+
+  async getShortlistedApplications(): Promise<Application[]> {
+    try {
+      const response = await api.get<
+        ApiResponse<{ applications: Application[] }>
+      >("/recruiter/applications/shortlisted");
+      return response.data.data.applications;
     } catch (error) {
       throw new Error(handleApiError(error));
     }

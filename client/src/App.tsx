@@ -14,11 +14,24 @@ import CompaniesPage from "@/pages/admin/Companies";
 import ApplicantsPage from "@/pages/admin/Applicants";
 import InterviewsPage from "@/pages/Interviews";
 import NotFound from "./pages/NotFound";
+import RecruiterCandidates from "@/pages/recruiter/Candidates";
 
 import { useEffect } from "react";
 import { useAuthStore } from "@/store/authStore";
 
 const queryClient = new QueryClient();
+
+// Candidates Wrapper Component
+const CandidatesPageWrapper = () => {
+  const { user } = useAuthStore();
+
+  if (user?.role === "recruiter") {
+    return <RecruiterCandidates />;
+  }
+
+  // Default to ApplicantsPage for Admin (and others if accessible)
+  return <ApplicantsPage initialFilter="shortlisted" />;
+};
 
 const App = () => {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -37,7 +50,6 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<Navigate to="/login" replace />} />
 
-            {/* Protected dashboard routes */}
             <Route
               element={
                 <ProtectedRoute>
@@ -50,11 +62,17 @@ const App = () => {
               <Route path="/applications" element={<ApplicationsPage />} />
               <Route path="/profile" element={<StudentProfile />} />
               <Route path="/companies" element={<CompaniesPage />} />
-              <Route path="/applicants" element={<ApplicantsPage />} />
+              <Route
+                path="/applicants"
+                element={<ApplicantsPage initialFilter="all" />}
+              />
               <Route path="/interviews" element={<InterviewsPage />} />
-              <Route path="/candidates" element={<ApplicantsPage />} />
-              <Route path="/feedback" element={<InterviewsPage />} />
-              <Route path="/offers" element={<Dashboard />} />
+              <Route path="/candidates" element={<CandidatesPageWrapper />} />
+
+              <Route
+                path="/offers"
+                element={<ApplicantsPage initialFilter="offer" />}
+              />
             </Route>
 
             <Route path="*" element={<NotFound />} />

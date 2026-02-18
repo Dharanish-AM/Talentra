@@ -68,11 +68,6 @@ const App = () => {
               />
               <Route path="/interviews" element={<InterviewsPage />} />
               <Route path="/candidates" element={<CandidatesPageWrapper />} />
-
-              <Route
-                path="/offers"
-                element={<ApplicantsPage initialFilter="offer" />}
-              />
             </Route>
 
             <Route path="*" element={<NotFound />} />

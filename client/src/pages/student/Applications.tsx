@@ -4,20 +4,30 @@ import { useDataStore } from "@/store/dataStore";
 import { useAuthStore } from "@/store/authStore";
 import PageHeader from "@/components/shared/PageHeader";
 import StatusBadge from "@/components/shared/StatusBadge";
-import { ApplicationStatus } from "@/types";
 
-const PIPELINE: ApplicationStatus[] = [
-  "applied",
-  "shortlisted",
-  "interview",
-  "selected",
-  "offer",
-];
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function ApplicationsPage() {
   const { user } = useAuthStore();
   const { applications } = useDataStore();
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+
   const myApps = applications.filter((a) => a.studentId === user?.id);
+
+  const filteredApps = myApps.filter((app) => {
+    const matchSearch =
+      app.companyName.toLowerCase().includes(search.toLowerCase()) ||
+      app.driveName.toLowerCase().includes(search.toLowerCase());
+    const matchStatus = statusFilter === "all" || app.status === statusFilter;
+    return matchSearch && matchStatus;
+  });
+
+  const [visibleCount, setVisibleCount] = useState(10);
+  const visibleApps = filteredApps.slice(0, visibleCount);
+
+  const uniqueStatuses = ["all", ...new Set(myApps.map((a) => a.status))];
 
   return (
     <div>
@@ -26,25 +36,36 @@ export default function ApplicationsPage() {
         description="Track the status of all your applications."
       />
 
-      <div className="mb-8 flex items-center gap-1 overflow-x-auto rounded-xl border border-border bg-card p-3">
-        {PIPELINE.map((stage, i) => {
-          const count = myApps.filter((a) => a.status === stage).length;
-          return (
-            <div key={stage} className="flex items-center">
-              <div className="flex flex-col items-center rounded-lg px-6 py-3">
-                <span className="font-display text-xl font-bold text-foreground">
-                  {count}
-                </span>
-                <span className="text-xs capitalize text-muted-foreground">
-                  {stage}
-                </span>
-              </div>
-              {i < PIPELINE.length - 1 && (
-                <div className="mx-1 h-px w-8 bg-border" />
-              )}
-            </div>
-          );
-        })}
+      <div className="mb-6 flex flex-wrap items-center gap-3">
+        <div className="relative flex-1 max-w-sm">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search by company or role..."
+            className="w-full rounded-lg border border-input bg-background py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+          />
+        </div>
+        {[
+          "all",
+          "applied",
+          "shortlisted",
+          "interview",
+          "selected",
+          "rejected",
+        ].map((s) => (
+          <button
+            key={s}
+            onClick={() => setStatusFilter(s)}
+            className={`rounded-full px-4 py-1.5 text-xs font-semibold capitalize transition-colors ${
+              statusFilter === s
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:bg-muted/80"
+            }`}
+          >
+            {s}
+          </button>
+        ))}
       </div>
 
       <div className="overflow-hidden rounded-xl border border-border bg-card">
@@ -69,7 +90,7 @@ export default function ApplicationsPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {myApps.map((app) => (
+            {visibleApps.map((app) => (
               <tr key={app.id} className="transition-colors hover:bg-muted/30">
                 <td className="px-6 py-4 text-sm font-medium text-foreground">
                   {app.companyName}
@@ -88,19 +109,30 @@ export default function ApplicationsPage() {
                 </td>
               </tr>
             ))}
-            {myApps.length === 0 && (
+            {filteredApps.length === 0 && (
               <tr>
                 <td
                   colSpan={5}
                   className="px-6 py-12 text-center text-sm text-muted-foreground"
                 >
-                  No applications yet.
+                  No applications match your filters.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
+
+      {visibleCount < filteredApps.length && (
+        <div className="mt-8 flex justify-center">
+          <Button
+            variant="outline"
+            onClick={() => setVisibleCount((prev) => prev + 10)}
+          >
+            Show More
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

@@ -51,9 +51,18 @@ const updateCandidateResult = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, { interview }, "Result updated successfully"));
 });
 
+const createDrive = asyncHandler(async (req, res) => {
+  const drive = await recruiterService.createDrive(req.body, req.user.id);
+
+  res
+    .status(201)
+    .json(new ApiResponse(201, { drive }, "Drive created successfully"));
+});
+
 module.exports = {
   getCandidates,
   getShortlistedApplications,
   submitFeedback,
   updateCandidateResult,
+  createDrive,
 };

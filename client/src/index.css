@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 222 60% 22%;
+    --primary: 222 60% 16%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 20% 95%;
@@ -24,7 +24,7 @@
     --muted: 210 20% 96%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 160 60% 40%;
+    --accent: 160 60% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
@@ -32,7 +32,7 @@
 
     --border: 214 20% 90%;
     --input: 214 20% 90%;
-    --ring: 222 60% 22%;
+    --ring: 222 60% 16%;
 
     --radius: 0.625rem;
 
@@ -46,7 +46,7 @@
     --sidebar-ring: 160 60% 50%;
 
     /* Custom tokens */
-    --success: 160 60% 40%;
+    --success: 160 60% 50%;
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
@@ -55,8 +55,8 @@
 
     --gradient-brand: linear-gradient(
       135deg,
-      hsl(222 60% 22%),
-      hsl(222 60% 32%)
+      hsl(222 60% 16%),
+      hsl(222 60% 26%)
     );
     --gradient-accent: linear-gradient(
       135deg,
@@ -70,15 +70,15 @@
       hsl(160 40% 30%)
     );
 
-    --shadow-sm: 0 1px 2px 0 hsl(222 60% 22% / 0.05);
+    --shadow-sm: 0 1px 2px 0 hsl(222 60% 16% / 0.05);
     --shadow-md:
-      0 4px 6px -1px hsl(222 60% 22% / 0.08),
-      0 2px 4px -2px hsl(222 60% 22% / 0.05);
+      0 4px 6px -1px hsl(222 60% 16% / 0.08),
+      0 2px 4px -2px hsl(222 60% 16% / 0.05);
     --shadow-lg:
-      10px 15px -3px hsl(222 60% 22% / 0.08),
-      0 4px 6px -4px hsl(222 60% 22% / 0.04);
+      10px 15px -3px hsl(222 60% 16% / 0.08),
+      0 4px 6px -4px hsl(222 60% 16% / 0.04);
     --shadow-card:
-      0 1px 3px hsl(222 60% 22% / 0.06), 0 1px 2px hsl(222 60% 22% / 0.04);
+      0 1px 3px hsl(222 60% 16% / 0.06), 0 1px 2px hsl(222 60% 16% / 0.04);
 
     --font-display: "Poppins", sans-serif;
     --font-body: "Poppins", sans-serif;
@@ -97,7 +97,7 @@
     --secondary-foreground: 210 40% 98%;
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
-    --accent: 160 60% 40%;
+    --accent: 160 60% 50%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;

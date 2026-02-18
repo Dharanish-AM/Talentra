@@ -27,5 +27,6 @@ router.post("/offers/release", adminController.releaseOffers);
 router.get("/applications", adminController.getAllApplications);
 
 router.get("/analytics", adminController.getAnalytics);
+router.get("/analytics/export", adminController.exportAnalytics);
 
 module.exports = router;

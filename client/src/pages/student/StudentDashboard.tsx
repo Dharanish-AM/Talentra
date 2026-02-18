@@ -17,6 +17,12 @@ export default function StudentDashboard() {
   const activeDrives = drives.filter((d) => d.status === "active");
   const [selectedDrive, setSelectedDrive] = useState<JobDrive | null>(null);
 
+  const [visibleAppsCount, setVisibleAppsCount] = useState(5);
+  const visibleApps = myApps.slice(0, visibleAppsCount);
+
+  const [visibleDrivesCount, setVisibleDrivesCount] = useState(4);
+  const visibleDrives = activeDrives.slice(0, visibleDrivesCount);
+
   return (
     <div>
       <PageHeader
@@ -76,7 +82,7 @@ export default function StudentDashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {myApps.map((app) => (
+              {visibleApps.map((app) => (
                 <tr
                   key={app.id}
                   className="transition-colors hover:bg-muted/30"
@@ -95,18 +101,24 @@ export default function StudentDashboard() {
                   </td>
                 </tr>
               ))}
-              {myApps.length === 0 && (
-                <tr>
-                  <td
-                    colSpan={4}
-                    className="px-6 py-12 text-center text-sm text-muted-foreground"
-                  >
-                    No applications yet. Explore active drives!
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
+          {visibleAppsCount < myApps.length && (
+            <div className="border-t border-border p-4 flex justify-center">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setVisibleAppsCount((prev) => prev + 5)}
+              >
+                Show More
+              </Button>
+            </div>
+          )}
+          {myApps.length === 0 && (
+            <div className="p-12 text-center text-sm text-muted-foreground border-t border-border">
+              No applications yet. Explore active drives!
+            </div>
+          )}
         </div>
       </div>
 
@@ -115,7 +127,7 @@ export default function StudentDashboard() {
           Active Drives
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
-          {activeDrives.map((drive) => (
+          {visibleDrives.map((drive) => (
             <div
               key={drive.id}
               className="cursor-pointer rounded-xl border border-border bg-card p-5 shadow-card transition-shadow hover:shadow-elevated"
@@ -142,6 +154,17 @@ export default function StudentDashboard() {
             </div>
           ))}
         </div>
+        {visibleDrivesCount < activeDrives.length && (
+          <div className="mt-4 flex justify-center">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setVisibleDrivesCount((prev) => prev + 4)}
+            >
+              Show More
+            </Button>
+          </div>
+        )}
       </div>
 
       <DriveDetailDialog

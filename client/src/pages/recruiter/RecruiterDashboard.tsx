@@ -17,6 +17,13 @@ export default function RecruiterDashboard() {
   const shortlisted = applications.filter(
     (a) => a.status === "shortlisted" || a.status === "interview",
   );
+
+  const [visibleInterviewsCount, setVisibleInterviewsCount] = useState(4);
+  const visibleInterviews = interviews.slice(0, visibleInterviewsCount);
+
+  const [visibleShortlistedCount, setVisibleShortlistedCount] = useState(5);
+  const visibleShortlisted = shortlisted.slice(0, visibleShortlistedCount);
+
   const [feedbackInterview, setFeedbackInterview] =
     useState<InterviewSlot | null>(null);
 
@@ -70,7 +77,7 @@ export default function RecruiterDashboard() {
           Upcoming Interviews
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
-          {interviews.map((interview) => (
+          {visibleInterviews.map((interview) => (
             <div
               key={interview.id}
               className="rounded-xl border border-border bg-card p-5 shadow-card"
@@ -139,6 +146,17 @@ export default function RecruiterDashboard() {
             </div>
           ))}
         </div>
+        {visibleInterviewsCount < interviews.length && (
+          <div className="mt-4 flex justify-center">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setVisibleInterviewsCount((prev) => prev + 4)}
+            >
+              Show More
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className="mt-8 animate-fade-in" style={{ animationDelay: "500ms" }}>
@@ -161,7 +179,7 @@ export default function RecruiterDashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {shortlisted.map((app) => (
+              {visibleShortlisted.map((app) => (
                 <tr
                   key={app.id}
                   className="transition-colors hover:bg-muted/30"
@@ -179,6 +197,17 @@ export default function RecruiterDashboard() {
               ))}
             </tbody>
           </table>
+          {visibleShortlistedCount < shortlisted.length && (
+            <div className="border-t border-border p-4 flex justify-center">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setVisibleShortlistedCount((prev) => prev + 5)}
+              >
+                Show More
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 

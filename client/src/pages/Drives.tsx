@@ -27,6 +27,9 @@ export default function DrivesPage() {
     return matchSearch && matchStatus;
   });
 
+  const [visibleCount, setVisibleCount] = useState(9);
+  const visibleDrives = filtered.slice(0, visibleCount);
+
   const alreadyApplied = (driveId: string) =>
     applications.some((a) => a.studentId === user?.id && a.driveId === driveId);
 
@@ -70,7 +73,7 @@ export default function DrivesPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((drive, i) => (
+        {visibleDrives.map((drive, i) => (
           <div
             key={drive.id}
             className="flex flex-col rounded-xl border border-border bg-card p-5 shadow-card transition-all hover:shadow-elevated animate-fade-in cursor-pointer"
@@ -144,6 +147,17 @@ export default function DrivesPage() {
           </div>
         ))}
       </div>
+
+      {visibleCount < filtered.length && (
+        <div className="mt-8 flex justify-center">
+          <Button
+            variant="outline"
+            onClick={() => setVisibleCount((prev) => prev + 9)}
+          >
+            Show More
+          </Button>
+        </div>
+      )}
       {filtered.length === 0 && (
         <div className="py-16 text-center text-sm text-muted-foreground">
           No drives match your filters.

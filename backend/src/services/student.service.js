@@ -69,6 +69,7 @@ const applyToDrive = async (userId, driveId) => {
   }
 
   const profile = await StudentProfile.findOne({ userId });
+
   if (!profile) {
     throw new ApiError(400, "Please complete your profile before applying");
   }

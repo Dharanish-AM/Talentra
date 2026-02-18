@@ -214,6 +214,20 @@ const getAnalytics = async () => {
   };
 };
 
+const getExportData = async () => {
+  const applications = await getAllApplications();
+  return applications.map((app) => ({
+    "Student Name": app.studentName,
+    Email: app.studentEmail,
+    Company: app.companyName,
+    Role: app.driveName,
+    Status: app.status,
+    "Applied At": app.appliedAt
+      ? new Date(app.appliedAt).toISOString().split("T")[0]
+      : "",
+  }));
+};
+
 module.exports = {
   getAllCompanies,
   createCompany,
@@ -231,4 +245,5 @@ module.exports = {
   releaseOffers,
   getAllApplications,
   getAnalytics,
+  getExportData,
 };

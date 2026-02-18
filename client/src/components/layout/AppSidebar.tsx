@@ -28,7 +28,6 @@ const adminLinks = [
   { to: "/drives", label: "Job Drives", icon: Briefcase },
   { to: "/applicants", label: "Applicants", icon: Users },
   { to: "/interviews", label: "Interviews", icon: Calendar },
-  { to: "/offers", label: "Offers", icon: Award },
 ];
 
 const recruiterLinks = [

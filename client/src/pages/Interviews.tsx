@@ -16,6 +16,9 @@ export default function InterviewsPage() {
   const [feedbackInterview, setFeedbackInterview] =
     useState<InterviewSlot | null>(null);
 
+  const [visibleCount, setVisibleCount] = useState(9);
+  const visibleInterviews = interviews.slice(0, visibleCount);
+
   const isRecruiter = user?.role === "recruiter";
 
   const handleResult = (
@@ -37,7 +40,7 @@ export default function InterviewsPage() {
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {interviews.map((interview, i) => (
+        {visibleInterviews.map((interview, i) => (
           <div
             key={interview.id}
             className="rounded-xl border border-border bg-card p-5 shadow-card animate-fade-in"
@@ -127,12 +130,24 @@ export default function InterviewsPage() {
             </div>
           </div>
         ))}
-        {interviews.length === 0 && (
-          <div className="col-span-full py-16 text-center text-sm text-muted-foreground">
-            No interviews scheduled yet.
-          </div>
-        )}
       </div>
+
+      {visibleCount < interviews.length && (
+        <div className="mt-8 flex justify-center">
+          <Button
+            variant="outline"
+            onClick={() => setVisibleCount((prev) => prev + 9)}
+          >
+            Show More
+          </Button>
+        </div>
+      )}
+
+      {interviews.length === 0 && (
+        <div className="py-16 text-center text-sm text-muted-foreground">
+          No interviews scheduled yet.
+        </div>
+      )}
 
       <FeedbackDialog
         open={!!feedbackInterview}

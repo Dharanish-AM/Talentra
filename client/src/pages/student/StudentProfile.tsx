@@ -14,12 +14,18 @@ export default function StudentProfile() {
   const [showEdit, setShowEdit] = useState(false);
   const [resumeName, setResumeName] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const data = await studentApi.getProfile();
         setProfile(data);
+        if (data.resumeUrl) {
+          // Extract filename from path
+          const fileName = data.resumeUrl.split(/[\\/]/).pop();
+          setResumeName(fileName || "Resume.pdf");
+        }
       } catch (error) {
         toast({
           title: "Error",
@@ -33,7 +39,7 @@ export default function StudentProfile() {
     fetchProfile();
   }, []);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (file.type !== "application/pdf") {
@@ -44,11 +50,40 @@ export default function StudentProfile() {
         });
         return;
       }
-      setResumeName(file.name);
-      toast({
-        title: "Resume uploaded",
-        description: `${file.name} has been uploaded successfully.`,
-      });
+
+      try {
+        setIsUploading(true);
+        const updatedProfile = await studentApi.uploadResume(file);
+        setProfile(updatedProfile);
+        setResumeName(file.name);
+        toast({
+          title: "Resume uploaded",
+          description: "Your resume has been uploaded successfully.",
+        });
+      } catch (error) {
+        toast({
+          title: "Upload failed",
+          description: "Failed to upload resume. Please try again.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsUploading(false);
+      }
+    }
+  };
+
+  const handleViewResume = () => {
+    if (profile?.resumeUrl) {
+      // Clean path separators (replace backslashes with forward slashes)
+      const cleanPath = profile.resumeUrl.replace(/\\/g, "/");
+      // Get base URL (remove /api from the end if present)
+      const baseUrl =
+        import.meta.env.VITE_API_BASE_URL?.replace("/api", "") ||
+        "http://localhost:8000";
+
+      // Construct full URL
+      const url = `${baseUrl}/${cleanPath}`;
+      window.open(url, "_blank");
     }
   };
 
@@ -129,7 +164,11 @@ export default function StudentProfile() {
               Resume
             </h3>
             {resumeName ? (
-              <div className="flex items-center gap-3 rounded-lg border border-border p-3">
+              <div
+                className="flex items-center gap-3 rounded-lg border border-border p-3 cursor-pointer hover:bg-muted/50 transition-colors"
+                onClick={handleViewResume}
+                title="Click to view resume"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-destructive/10 text-destructive text-xs font-bold">
                   PDF
                 </div>
@@ -141,13 +180,16 @@ export default function StudentProfile() {
                     Uploaded just now
                   </p>
                 </div>
-                <label className="cursor-pointer text-xs font-medium text-primary hover:underline">
-                  Replace
+                <label
+                  className={`cursor-pointer text-xs font-medium text-primary hover:underline ${isUploading ? "pointer-events-none opacity-50" : ""}`}
+                >
+                  {isUploading ? "Uploading..." : "Replace"}
                   <input
                     type="file"
                     accept=".pdf"
                     className="hidden"
                     onChange={handleFileUpload}
+                    disabled={isUploading}
                   />
                 </label>
               </div>
@@ -155,7 +197,7 @@ export default function StudentProfile() {
               <label className="block cursor-pointer rounded-lg border-2 border-dashed border-border p-8 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
                 <Upload className="mx-auto h-8 w-8 text-muted-foreground" />
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Click to upload your resume
+                  {isUploading ? "Uploading..." : "Click to upload your resume"}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   PDF format, max 5MB
@@ -165,6 +207,7 @@ export default function StudentProfile() {
                   accept=".pdf"
                   className="hidden"
                   onChange={handleFileUpload}
+                  disabled={isUploading}
                 />
               </label>
             )}

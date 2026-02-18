@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useDataStore } from "@/store/dataStore";
 import PageHeader from "@/components/shared/PageHeader";
 import StatusBadge from "@/components/shared/StatusBadge";
@@ -11,8 +12,18 @@ import FeedbackDialog from "@/components/modals/FeedbackDialog";
 
 export default function RecruiterCandidates() {
   const { interviews, updateInterviewResult } = useDataStore();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
+
+  const statusFilter = searchParams.get("filter") || "all";
+
+  const setStatusFilter = (val: string) => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("filter", val);
+      return newParams;
+    });
+  };
   const [feedbackInterview, setFeedbackInterview] =
     useState<InterviewSlot | null>(null);
 
@@ -24,6 +35,9 @@ export default function RecruiterCandidates() {
       (statusFilter === "all" || (i.result || "pending") === statusFilter)
     );
   });
+
+  const [visibleCount, setVisibleCount] = useState(10);
+  const visibleCandidates = filtered.slice(0, visibleCount);
 
   const handleResult = (
     interview: InterviewSlot,
@@ -90,7 +104,7 @@ export default function RecruiterCandidates() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {filtered.map((interview) => (
+            {visibleCandidates.map((interview) => (
               <tr
                 key={interview.id}
                 className="transition-colors hover:bg-muted/30"
@@ -164,6 +178,17 @@ export default function RecruiterCandidates() {
           </tbody>
         </table>
       </div>
+
+      {visibleCount < filtered.length && (
+        <div className="mt-8 flex justify-center">
+          <Button
+            variant="outline"
+            onClick={() => setVisibleCount((prev) => prev + 10)}
+          >
+            Show More
+          </Button>
+        </div>
+      )}
 
       <FeedbackDialog
         open={!!feedbackInterview}

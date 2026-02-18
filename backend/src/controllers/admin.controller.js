@@ -1,6 +1,7 @@
 const adminService = require("../services/admin.service");
 const asyncHandler = require("../utils/asyncHandler");
 const ApiResponse = require("../utils/ApiResponse");
+const { convertToCSV } = require("../utils/csvExporter");
 
 const getAllCompanies = asyncHandler(async (req, res) => {
   const companies = await adminService.getAllCompanies();
@@ -155,6 +156,15 @@ const getAnalytics = asyncHandler(async (req, res) => {
     );
 });
 
+const exportAnalytics = asyncHandler(async (req, res) => {
+  const data = await adminService.getExportData();
+  const csv = convertToCSV(data);
+
+  res.header("Content-Type", "text/csv");
+  res.attachment("placement_report.csv");
+  res.send(csv);
+});
+
 module.exports = {
   getAllCompanies,
   createCompany,
@@ -172,4 +182,5 @@ module.exports = {
   releaseOffers,
   getAllApplications,
   getAnalytics,
+  exportAnalytics,
 };

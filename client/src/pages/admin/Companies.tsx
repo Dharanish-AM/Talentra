@@ -13,6 +13,9 @@ export default function CompaniesPage() {
   const [showAdd, setShowAdd] = useState(false);
   const [selectedDrive, setSelectedDrive] = useState<JobDrive | null>(null);
 
+  const [visibleCount, setVisibleCount] = useState(9);
+  const visibleCompanies = companies.slice(0, visibleCount);
+
   return (
     <div>
       <PageHeader
@@ -26,7 +29,7 @@ export default function CompaniesPage() {
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {companies.map((company, i) => {
+        {visibleCompanies.map((company, i) => {
           const companyDrives = drives.filter((d) => {
             const getDriveCompanyId = (
               id: string | { _id: string; id?: string },
@@ -96,6 +99,17 @@ export default function CompaniesPage() {
           );
         })}
       </div>
+
+      {visibleCount < companies.length && (
+        <div className="mt-8 flex justify-center">
+          <Button
+            variant="outline"
+            onClick={() => setVisibleCount((prev) => prev + 9)}
+          >
+            Show More
+          </Button>
+        </div>
+      )}
 
       <AddCompanyDialog open={showAdd} onOpenChange={setShowAdd} />
       <DriveDetailDialog

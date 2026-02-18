@@ -8,6 +8,281 @@ const JobDrive = require("../models/JobDrive");
 const Application = require("../models/Application");
 const Interview = require("../models/Interview");
 
+// Helper functions
+const getRandomElement = (array) =>
+  array[Math.floor(Math.random() * array.length)];
+const getRandomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+const getRandomDate = (start, end) =>
+  new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+
+// --- REALISTIC DATA SETS ---
+
+const departments = [
+  "Computer Science",
+  "IT",
+  "Electronics",
+  "Electrical",
+  "Mechanical",
+  "Civil",
+  "AI/ML",
+  "Chemical",
+  "Chemical",
+];
+
+const technicalSkills = [
+  "React",
+  "Node.js",
+  "Python",
+  "Java",
+  "C++",
+  "AWS",
+  "Docker",
+  "Kubernetes",
+  "Machine Learning",
+  "Data Analysis",
+  "Figma",
+  "SQL",
+  "MongoDB",
+  "Express",
+  "TypeScript",
+  "Go",
+  "Rust",
+  "Flutter",
+  "Spring Boot",
+  "TensorFlow",
+  "PyTorch",
+];
+
+// Indian specific names for realism
+const firstNames = [
+  "Aarav",
+  "Vivaan",
+  "Aditya",
+  "Vihaan",
+  "Arjun",
+  "Sai",
+  "Reyansh",
+  "Ayaan",
+  "Krishna",
+  "Ishaan",
+  "Shaurya",
+  "Atharva",
+  "Dhruv",
+  "Rohan",
+  "Kabir",
+  "Aryan",
+  "Siddharth",
+  "Ananya",
+  "Diya",
+  "Saanvi",
+  "Aadhya",
+  "Pari",
+  "Kiara",
+  "Myra",
+  "Sarah",
+  "Riya",
+  "Anvi",
+  "Aarya",
+  "Kyra",
+  "Shanaya",
+  "Nisha",
+  "Kavya",
+  "Mira",
+  "Sneha",
+];
+
+const lastNames = [
+  "Sharma",
+  "Verma",
+  "Gupta",
+  "Malhotra",
+  "Bhatia",
+  "Saxena",
+  "Mehta",
+  "Chopra",
+  "Singh",
+  "Das",
+  "Patel",
+  "Reddy",
+  "Nair",
+  "Iyer",
+  "Rao",
+  "Kumar",
+  "Mishra",
+  "Joshi",
+  "Desai",
+  "Yadav",
+  "Kulkarni",
+  "Reddy",
+  "Menon",
+  "Banerjee",
+];
+
+const companyData = [
+  {
+    name: "TechCorp Solutions",
+    industry: "IT Services",
+    description:
+      "A global leader in IT services and consulting, helping clients navigate their digital transformation journeys with AI-driven solutions.",
+    website: "https://techcorp.example.com",
+  },
+  {
+    name: "InnovateLabs",
+    industry: "Product Development",
+    description:
+      "A fast-paced product company building next-generation SaaS platforms for the creator economy, backed by top-tier VCs.",
+    website: "https://innovatelabs.example.com",
+  },
+  {
+    name: "FinServe Global",
+    industry: "Financial Technology",
+    description:
+      "Fintech giant revolutionizing digital payments and banking infrastructure across Asia and Africa.",
+    website: "https://finserve.example.com",
+  },
+  {
+    name: "GreenTech Energy",
+    industry: "Clean Energy",
+    description:
+      "Pioneering sustainable energy solutions with smart grid technology and renewable power generation systems.",
+    website: "https://greentech.example.com",
+  },
+  {
+    name: "HealthPlus AI",
+    industry: "Healthcare Tech",
+    description:
+      "Leveraging artificial intelligence to improve diagnostic accuracy and patient outcomes in hospitals worldwide.",
+    website: "https://healthplus.example.com",
+  },
+  {
+    name: "UrbanMobility",
+    industry: "Automotive & EV",
+    description:
+      "Designing the future of urban transportation with autonomous electric vehicles and smart charging networks.",
+    website: "https://urbanmobility.example.com",
+  },
+  {
+    name: "CyberShield Systems",
+    industry: "Cybersecurity",
+    description:
+      "Providing enterprise-grade security solutions to protect critical infrastructure from advanced cyber threats.",
+    website: "https://cybershield.example.com",
+  },
+  {
+    name: "EduVerse",
+    industry: "EdTech",
+    description:
+      "Democratizing education through immersive VR/AR learning experiences and personalized AI tutors.",
+    website: "https://eduverse.example.com",
+  },
+  {
+    name: "CloudScale Infra",
+    industry: "Cloud Computing",
+    description:
+      "Building resilient and scalable cloud infrastructure services for high-growth enterprises.",
+    website: "https://cloudscale.example.com",
+  },
+  {
+    name: "MediaStream",
+    industry: "Media & Entertainment",
+    description:
+      "Top-tier streaming platform delivering 4K HDR content to millions of subscribers globally.",
+    website: "https://mediastream.example.com",
+  },
+];
+
+const jobRoles = [
+  {
+    title: "Software Development Engineer - I",
+    role: "Software Engineer",
+    description:
+      "Join our core engineering team to build scalable backend services. You will work with Node.js, Microservices, and High-scale databases.",
+    packageRange: [12, 18],
+    eligibility: {
+      depts: ["Computer Science", "IT"],
+      minCgpa: 8.0,
+    },
+  },
+  {
+    title: "Frontend Engineer",
+    role: "Frontend Developer",
+    description:
+      "Create stunning user interfaces using React and TypeScript. Focus on performance, accessibility, and responsive design.",
+    packageRange: [10, 16],
+    eligibility: {
+      depts: ["Computer Science", "IT", "Electronics"],
+      minCgpa: 7.5,
+    },
+  },
+  {
+    title: "Data Scientist",
+    role: "Data Scientist",
+    description:
+      "Analyze large datasets to derive actionable insights. Expertise in Python, SQL, and Machine Learning algorithms required.",
+    packageRange: [14, 22],
+    eligibility: {
+      depts: ["Computer Science", "AI/ML"],
+      minCgpa: 8.5,
+    },
+  },
+  {
+    title: "DevOps Engineer",
+    role: "DevOps Engineer",
+    description:
+      "Automate deployment pipelines and manage cloud infrastructure on AWS/Azure. Knowledge of Docker and Kubernetes is a must.",
+    packageRange: [11, 17],
+    eligibility: {
+      depts: ["Computer Science", "IT", "Electronics"],
+      minCgpa: 7.0,
+    },
+  },
+  {
+    title: "Embedded Systems Engineer",
+    role: "Embedded Engineer",
+    description:
+      "Design and implement firmware for IoT devices. Strong command over C/C++ and microcontroller architecture needed.",
+    packageRange: [9, 15],
+    eligibility: {
+      depts: ["Electronics", "Electrical"],
+      minCgpa: 7.0,
+    },
+  },
+  {
+    title: "Business Analyst",
+    role: "Business Analyst",
+    description:
+      "Bridge the gap between business requirements and technical solutions. Strong analytical and communication skills required.",
+    packageRange: [8, 14],
+    eligibility: {
+      depts: ["Computer Science", "IT", "Mechanical", "Civil"],
+      minCgpa: 6.5,
+    },
+  },
+  {
+    title: "Product Management Intern",
+    role: "Product Manager",
+    description:
+      "Work with cross-functional teams to define product strategy and roadmap. Passion for user experience is key.",
+    packageRange: [10, 15],
+    eligibility: {
+      depts: ["Computer Science", "IT", "AI/ML"],
+      minCgpa: 7.5,
+    },
+  },
+];
+
+const locations = [
+  "Bangalore",
+  "Hyderabad",
+  "Pune",
+  "Gurgaon",
+  "Mumbai",
+  "Noida",
+  "Chennai",
+  "Remote",
+];
+
 const seedData = async () => {
   try {
     await connectDB();
@@ -20,8 +295,9 @@ const seedData = async () => {
     await Application.deleteMany({});
     await Interview.deleteMany({});
 
-    logger.info("Creating users...");
-    const users = await User.create([
+    // --- USERS ---
+    logger.info("Creating base users...");
+    const baseUsers = await User.create([
       {
         name: "Rahul Sharma",
         email: "rahul.sharma@university.edu",
@@ -48,221 +324,241 @@ const seedData = async () => {
       },
     ]);
 
+    const adminUser = baseUsers.find((u) => u.role === "admin");
+
+    logger.info("Generating additional students...");
+    const extraStudents = [];
+    for (let i = 0; i < 28; i++) {
+      // Increased count slightly
+      const firstName = getRandomElement(firstNames);
+      const lastName = getRandomElement(lastNames);
+      const name = `${firstName} ${lastName}`;
+      // Clean email generation
+      const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${getRandomInt(1, 99)}@university.edu`;
+
+      extraStudents.push({
+        name,
+        email,
+        password: "password123",
+        role: "student",
+      });
+    }
+    const createdExtraStudents = await User.create(extraStudents);
+    const allStudents = [baseUsers[0], baseUsers[1], ...createdExtraStudents];
+
+    // --- PROFILES ---
     logger.info("Creating student profiles...");
-    await StudentProfile.create([
-      {
-        userId: users[0]._id,
-        department: "Computer Science",
-        cgpa: 8.7,
-        backlogs: 0,
-        phone: "+91 98765 43210",
-        graduationYear: 2025,
-        skills: ["React", "Node.js", "Python", "SQL"],
-      },
-      {
-        userId: users[1]._id,
-        department: "Electronics",
-        cgpa: 7.9,
-        backlogs: 1,
-        phone: "+91 98765 43211",
-        graduationYear: 2025,
-        skills: ["VLSI", "Embedded C", "MATLAB"],
-      },
-    ]);
+    const studentProfiles = [];
+    for (const student of allStudents) {
+      const numSkills = getRandomInt(4, 10);
+      const studentSkills = [];
+      while (studentSkills.length < numSkills) {
+        const skill = getRandomElement(technicalSkills);
+        if (!studentSkills.includes(skill)) studentSkills.push(skill);
+      }
 
+      // Consistent profile for base users
+      let dept = getRandomElement(departments);
+      let cgpa = parseFloat((Math.random() * (9.8 - 6.5) + 6.5).toFixed(2));
+
+      if (student.email === "rahul.sharma@university.edu") {
+        dept = "Computer Science";
+        cgpa = 8.9;
+      } else if (student.email === "priya.patel@university.edu") {
+        dept = "Electronics";
+        cgpa = 9.2;
+      }
+
+      studentProfiles.push({
+        userId: student._id,
+        department: dept,
+        cgpa: cgpa,
+        backlogs: Math.random() > 0.85 ? getRandomInt(1, 2) : 0,
+        phone: `+91 ${getRandomInt(60000, 99999)} ${getRandomInt(10000, 99999)}`,
+        graduationYear: 2025,
+        skills: studentSkills,
+      });
+    }
+    await StudentProfile.create(studentProfiles);
+
+    // --- COMPANIES ---
     logger.info("Creating companies...");
-    const companies = await Company.create([
-      {
-        name: "TechCorp Solutions",
-        industry: "IT Services",
-        description:
-          "Leading IT consulting and services company with global presence.",
-        website: "https://techcorp.example.com",
-        createdBy: users[2]._id,
-      },
-      {
-        name: "InnovateLabs",
-        industry: "Product Development",
-        description:
-          "AI-first product company building next-gen SaaS solutions.",
-        website: "https://innovatelabs.example.com",
-        createdBy: users[2]._id,
-      },
-      {
-        name: "FinServe Global",
-        industry: "Financial Technology",
-        description:
-          "Fintech company transforming digital payments across Asia.",
-        website: "https://finserve.example.com",
-        createdBy: users[2]._id,
-      },
-      {
-        name: "GreenTech Energy",
-        industry: "Clean Energy",
-        description:
-          "Renewable energy solutions and smart grid technology provider.",
-        website: "https://greentech.example.com",
-        createdBy: users[2]._id,
-      },
-    ]);
+    const companiesWithType = companyData.map((c) => ({
+      ...c,
+      createdBy: adminUser._id,
+    }));
+    const companies = await Company.create(companiesWithType);
 
+    // --- JOB DRIVES ---
     logger.info("Creating job drives...");
-    const drives = await JobDrive.create([
-      {
-        companyId: companies[0]._id,
-        companyName: companies[0].name,
-        title: "Software Engineer Campus 2025",
-        role: "Software Engineer",
-        description:
-          "Full-stack development role working on enterprise applications.",
-        package: "₹12 LPA",
-        location: "Bangalore",
-        eligibility: {
-          minCgpa: 7.0,
-          allowedDepartments: ["Computer Science", "IT", "Electronics"],
-          maxBacklogs: 0,
-        },
-        deadline: new Date("2025-03-15"),
-        driveDate: new Date("2025-03-25"),
-        status: "active",
-        createdBy: users[2]._id,
-      },
-      {
-        companyId: companies[1]._id,
-        companyName: companies[1].name,
-        title: "ML Engineer Intern",
-        role: "ML Engineer",
-        description: "Research and implement ML models for production systems.",
-        package: "₹18 LPA",
-        location: "Hyderabad",
-        eligibility: {
-          minCgpa: 8.0,
-          allowedDepartments: ["Computer Science", "AI/ML"],
-          maxBacklogs: 0,
-        },
-        deadline: new Date("2025-03-10"),
-        driveDate: new Date("2025-03-20"),
-        status: "active",
-        createdBy: users[2]._id,
-      },
-      {
-        companyId: companies[2]._id,
-        companyName: companies[2].name,
-        title: "Business Analyst",
-        role: "Business Analyst",
-        description:
-          "Analyze financial data and derive insights for product strategy.",
-        package: "₹10 LPA",
-        location: "Mumbai",
-        eligibility: {
-          minCgpa: 6.5,
-          allowedDepartments: [
-            "Computer Science",
-            "IT",
-            "Electronics",
-            "Mechanical",
-          ],
-          maxBacklogs: 1,
-        },
-        deadline: new Date("2025-04-01"),
-        driveDate: new Date("2025-04-10"),
-        status: "upcoming",
-        createdBy: users[2]._id,
-      },
-      {
-        companyId: companies[3]._id,
-        companyName: companies[3].name,
-        title: "Embedded Systems Engineer",
-        role: "Embedded Engineer",
-        description: "Design and develop firmware for smart grid controllers.",
-        package: "₹9 LPA",
-        location: "Pune",
-        eligibility: {
-          minCgpa: 7.0,
-          allowedDepartments: ["Electronics", "Electrical"],
-          maxBacklogs: 0,
-        },
-        deadline: new Date("2025-02-28"),
-        driveDate: new Date("2025-03-05"),
-        status: "completed",
-        createdBy: users[2]._id,
-      },
-    ]);
+    const drivesData = [];
 
+    // Create at least 2 drives for each company
+    for (const company of companies) {
+      const numDrives = getRandomInt(2, 3);
+
+      for (let i = 0; i < numDrives; i++) {
+        const job = getRandomElement(jobRoles);
+        const isPast = Math.random() > 0.6; // 60% chance of past/completed drives
+
+        const driveDate = isPast
+          ? getRandomDate(new Date("2024-11-01"), new Date("2025-02-10"))
+          : getRandomDate(new Date("2025-02-25"), new Date("2025-05-30"));
+
+        const deadline = new Date(driveDate);
+        deadline.setDate(driveDate.getDate() - getRandomInt(7, 14)); // Deadline 1-2 weeks before drive
+
+        const status = isPast
+          ? "completed"
+          : Math.random() > 0.4
+            ? "active"
+            : "upcoming";
+        const pkg = getRandomInt(job.packageRange[0], job.packageRange[1]);
+
+        drivesData.push({
+          companyId: company._id,
+          companyName: company.name,
+          title: job.title,
+          role: job.role,
+          description: job.description,
+          package: `₹${pkg} LPA`,
+          location: getRandomElement(locations),
+          eligibility: {
+            minCgpa: job.eligibility.minCgpa,
+            allowedDepartments: job.eligibility.depts,
+            maxBacklogs: i % 2 === 0 ? 0 : 1, // Occasional backlog allowance
+          },
+          deadline: deadline,
+          driveDate: driveDate,
+          status: status,
+          createdBy: adminUser._id,
+        });
+      }
+    }
+    const drives = await JobDrive.create(drivesData);
+
+    // --- APPLICATIONS ---
     logger.info("Creating applications...");
-    await Application.create([
-      {
-        studentId: users[0]._id,
-        studentName: users[0].name,
-        driveId: drives[0]._id,
-        driveName: drives[0].title,
-        companyName: drives[0].companyName,
-        status: "shortlisted",
-        appliedAt: new Date("2025-02-20"),
-      },
-      {
-        studentId: users[0]._id,
-        studentName: users[0].name,
-        driveId: drives[1]._id,
-        driveName: drives[1].title,
-        companyName: drives[1].companyName,
-        status: "applied",
-        appliedAt: new Date("2025-02-25"),
-      },
-      {
-        studentId: users[1]._id,
-        studentName: users[1].name,
-        driveId: drives[0]._id,
-        driveName: drives[0].title,
-        companyName: drives[0].companyName,
-        status: "interview",
-        appliedAt: new Date("2025-02-18"),
-      },
-      {
-        studentId: users[1]._id,
-        studentName: users[1].name,
-        driveId: drives[2]._id,
-        driveName: drives[2].title,
-        companyName: drives[2].companyName,
-        status: "applied",
-        appliedAt: new Date("2025-03-01"),
-      },
-    ]);
+    const applicationsData = [];
+    const applicationStatuses = [
+      "applied",
+      "shortlisted",
+      "interview",
+      "selected",
+      "rejected",
+      "offer",
+    ];
 
+    for (const drive of drives) {
+      // Filter students who are eligible (simple check on department)
+      const eligibleStudents = allStudents.filter((s) => {
+        // Need to find their profile, but for simplicity in seeding, we'll just pick random subset
+        // In a real app, strict eligibility check happens. Here we just want data.
+        return Math.random() > 0.7; // 30% of students apply
+      });
+
+      for (const student of eligibleStudents) {
+        // Prevent random duplicates
+        if (
+          applicationsData.some(
+            (a) => a.studentId === student._id && a.driveId === drive._id,
+          )
+        )
+          continue;
+
+        const status = getRandomElement(applicationStatuses);
+        const appliedAt = new Date(drive.deadline);
+        appliedAt.setDate(appliedAt.getDate() - getRandomInt(1, 10));
+
+        applicationsData.push({
+          studentId: student._id,
+          studentName: student.name,
+          driveId: drive._id,
+          driveName: drive.title,
+          companyName: drive.companyName,
+          status: status,
+          appliedAt: appliedAt,
+        });
+      }
+    }
+
+    // Ensure Rahul (Student 1) has specific relevant data
+    const rahul = baseUsers[0];
+    const techCorp = companies.find((c) => c.name === "TechCorp Solutions");
+    const techDrive = drives.find(
+      (d) => d.companyId.equals(techCorp?._id) && d.status === "active",
+    );
+
+    if (techDrive) {
+      // Check if already applied
+      const existingAppIndex = applicationsData.findIndex(
+        (a) => a.studentId === rahul._id && a.driveId === techDrive._id,
+      );
+      if (existingAppIndex !== -1) {
+        applicationsData[existingAppIndex].status = "shortlisted";
+      } else {
+        applicationsData.push({
+          studentId: rahul._id,
+          studentName: rahul.name,
+          driveId: techDrive._id,
+          driveName: techDrive.title,
+          companyName: techDrive.companyName,
+          status: "shortlisted",
+          appliedAt: new Date(),
+        });
+      }
+    }
+
+    const createdApplications = await Application.create(applicationsData);
+
+    // --- INTERVIEWS ---
     logger.info("Creating interviews...");
-    await Interview.create([
-      {
-        driveId: drives[0]._id,
-        studentId: users[1]._id,
-        studentName: users[1].name,
-        date: "2025-03-25",
-        time: "10:00 AM",
-        mode: "online",
-        link: "https://meet.example.com/interview-1",
-        result: "pending",
-      },
-      {
-        driveId: drives[0]._id,
-        studentId: users[0]._id,
-        studentName: users[0].name,
-        date: "2025-03-25",
-        time: "11:30 AM",
-        mode: "online",
-        link: "https://meet.example.com/interview-2",
-        result: "pending",
-      },
-    ]);
+    const interviewsData = [];
 
-    logger.info("✅ Database seeded successfully!");
-    logger.info("\nTest Credentials:");
-    logger.info("Student 1: rahul.sharma@university.edu / password123");
-    logger.info("Student 2: priya.patel@university.edu / password123");
-    logger.info("Admin: admin@placements.edu / admin123");
-    logger.info("Recruiter: recruiter@techcorp.com / recruiter123");
+    const interviewEligibleApps = createdApplications.filter((app) =>
+      ["shortlisted", "interview", "selected", "offer"].includes(app.status),
+    );
+
+    for (const app of interviewEligibleApps) {
+      if (Math.random() > 0.5) {
+        const drive = drives.find((d) => d._id.equals(app.driveId));
+        const interviewDate = new Date(drive.driveDate);
+        interviewDate.setDate(interviewDate.getDate() + getRandomInt(1, 5));
+
+        interviewsData.push({
+          driveId: app.driveId,
+          studentId: app.studentId,
+          studentName: app.studentName,
+          date: interviewDate.toISOString().split("T")[0], // YYYY-MM-DD
+          time: `${getRandomInt(9, 17)}:${getRandomInt(0, 1) === 0 ? "00" : "30"}`,
+          mode: getRandomElement(["online", "offline"]),
+          link: "https://meet.google.com/abc-defg-" + getRandomInt(100, 999),
+          result:
+            app.status === "rejected"
+              ? "rejected"
+              : app.status === "selected" || app.status === "offer"
+                ? "selected"
+                : "pending",
+        });
+      }
+    }
+
+    await Interview.create(interviewsData);
+
+    logger.info("✅ Database seeded with HIGH QUALITY data successfully!");
+    logger.info("------------------------------------------------");
+    logger.info(`Generated:`);
+    logger.info(`- Users: ${allStudents.length}`);
+    logger.info(`- Companies: ${companies.length}`);
+    logger.info(`- Job Drives: ${drives.length}`);
+    logger.info(`- Applications: ${createdApplications.length}`);
+    logger.info(`- Interviews: ${interviewsData.length}`);
+    logger.info("------------------------------------------------");
 
     process.exit(0);
   } catch (error) {
     logger.error(`Error seeding database: ${error.message}`);
+    console.error(error);
     process.exit(1);
   }
 };

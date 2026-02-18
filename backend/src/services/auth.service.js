@@ -10,7 +10,7 @@ const generateToken = (id) => {
 };
 
 const register = async (userData) => {
-  const { name, email, password, role } = userData;
+  const { name, email, password, role, phone } = userData;
 
   const existingUser = await User.findOne({ email });
   if (existingUser) {
@@ -30,7 +30,7 @@ const register = async (userData) => {
       department: "Computer Science",
       cgpa: 0,
       backlogs: 0,
-      phone: "",
+      phone: phone || "",
       graduationYear: new Date().getFullYear() + 1,
       skills: [],
     });

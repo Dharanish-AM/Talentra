@@ -1,5 +1,8 @@
 const Interview = require("../models/Interview");
 const Application = require("../models/Application");
+const JobDrive = require("../models/JobDrive");
+const Company = require("../models/Company");
+const User = require("../models/User");
 const ApiError = require("../utils/ApiError");
 
 const getCandidates = async () => {
@@ -32,6 +35,27 @@ const getShortlistedApplications = async () => {
     driveName: app.driveId?.role || "Unknown Drive",
     companyName: app.driveId?.companyName || "Unknown Company",
   }));
+};
+
+const createDrive = async (driveData, recruiterId) => {
+  const recruiter = await User.findById(recruiterId);
+  if (!recruiter.companyId) {
+    throw new ApiError(400, "Recruiter is not associated with any company");
+  }
+
+  const company = await Company.findById(recruiter.companyId);
+  if (!company) {
+    throw new ApiError(404, "Company not found");
+  }
+
+  const drive = await JobDrive.create({
+    ...driveData,
+    companyId: company._id,
+    companyName: company.name,
+    createdBy: recruiterId,
+  });
+
+  return drive;
 };
 
 const submitFeedback = async (interviewId, feedbackData) => {
@@ -97,4 +121,5 @@ module.exports = {
   getShortlistedApplications,
   submitFeedback,
   updateCandidateResult,
+  createDrive,
 };

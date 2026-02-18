@@ -11,5 +11,9 @@ describe("Health Check", () => {
     const res = await request(app).get("/");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("status", "running");
+
+    // Verify security headers (Helmet)
+    expect(res.headers).toHaveProperty("x-dns-prefetch-control");
+    expect(res.headers).toHaveProperty("x-frame-options");
   });
 });

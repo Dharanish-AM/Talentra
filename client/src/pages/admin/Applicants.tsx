@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useDataStore } from "@/store/dataStore";
 import { useAuthStore } from "@/store/authStore";
 import PageHeader from "@/components/shared/PageHeader";
@@ -19,8 +20,35 @@ export default function ApplicantsPage({
 }: ApplicantsPageProps) {
   const { user } = useAuthStore();
   const { applications, updateApplicationStatus } = useDataStore();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState(initialFilter);
+
+  const statusFilter = searchParams.get("filter") || initialFilter;
+
+  useEffect(() => {
+    // If no filter param is present and we have a specific initialFilter (not 'all'),
+    // we might want to set it in the URL or just let the fallback handle it.
+    // The fallback handles it for rendering, but setting it in URL makes it explicit for sharing/reloading.
+    if (!searchParams.get("filter") && initialFilter !== "all") {
+      setSearchParams(
+        (prev) => {
+          const newParams = new URLSearchParams(prev);
+          newParams.set("filter", initialFilter);
+          return newParams;
+        },
+        { replace: true },
+      );
+    }
+  }, [initialFilter, searchParams, setSearchParams]);
+
+  const setStatusFilter = (status: string) => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("filter", status);
+      return newParams;
+    });
+  };
+
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
   const [scheduleApp, setScheduleApp] = useState<Application | null>(null);
 
@@ -31,6 +59,9 @@ export default function ApplicantsPage({
     const matchStatus = statusFilter === "all" || a.status === statusFilter;
     return matchSearch && matchStatus;
   });
+
+  const [visibleCount, setVisibleCount] = useState(10);
+  const visibleApps = filtered.slice(0, visibleCount);
 
   const handleQuickAction = (
     app: Application,
@@ -105,7 +136,7 @@ export default function ApplicantsPage({
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {filtered.map((app) => (
+            {visibleApps.map((app) => (
               <tr key={app.id} className="transition-colors hover:bg-muted/30">
                 <td className="px-6 py-4 text-sm font-medium text-foreground">
                   {app.studentName}
@@ -175,6 +206,17 @@ export default function ApplicantsPage({
           </tbody>
         </table>
       </div>
+
+      {visibleCount < filtered.length && (
+        <div className="mt-8 flex justify-center">
+          <Button
+            variant="outline"
+            onClick={() => setVisibleCount((prev) => prev + 10)}
+          >
+            Show More
+          </Button>
+        </div>
+      )}
 
       <ViewApplicantDialog
         open={!!selectedApp}

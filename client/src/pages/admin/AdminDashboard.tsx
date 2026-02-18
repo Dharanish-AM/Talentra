@@ -15,6 +15,12 @@ export default function AdminDashboard() {
   const [showCreate, setShowCreate] = useState(false);
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
 
+  const [visibleDrivesCount, setVisibleDrivesCount] = useState(5);
+  const visibleDrives = drives.slice(0, visibleDrivesCount);
+
+  const [visibleAppsCount, setVisibleAppsCount] = useState(5);
+  const visibleApps = applications.slice(0, visibleAppsCount);
+
   return (
     <div>
       <PageHeader
@@ -89,7 +95,7 @@ export default function AdminDashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {drives.map((drive) => (
+              {visibleDrives.map((drive) => (
                 <tr
                   key={drive.id}
                   className="transition-colors hover:bg-muted/30"
@@ -116,6 +122,17 @@ export default function AdminDashboard() {
               ))}
             </tbody>
           </table>
+          {visibleDrivesCount < drives.length && (
+            <div className="border-t border-border p-4 flex justify-center">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setVisibleDrivesCount((prev) => prev + 5)}
+              >
+                Show More
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -145,7 +162,7 @@ export default function AdminDashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {applications.map((app) => (
+              {visibleApps.map((app) => (
                 <tr
                   key={app.id}
                   className="transition-colors hover:bg-muted/30"
@@ -176,6 +193,17 @@ export default function AdminDashboard() {
               ))}
             </tbody>
           </table>
+          {visibleAppsCount < applications.length && (
+            <div className="border-t border-border p-4 flex justify-center">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setVisibleAppsCount((prev) => prev + 5)}
+              >
+                Show More
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 

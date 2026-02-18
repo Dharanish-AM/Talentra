@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+const compression = require("compression");
 const connectDB = require("./config/database");
 const logger = require("./config/logger");
 const routes = require("./routes");
@@ -10,9 +11,12 @@ const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
-connectDB();
+if (process.env.NODE_ENV !== "test") {
+  connectDB();
+}
 
 app.use(helmet());
+app.use(compression());
 
 app.use(
   cors({

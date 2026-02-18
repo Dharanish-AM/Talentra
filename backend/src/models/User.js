@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
     },
+    companyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
   },
   {
     timestamps: true,

@@ -187,4 +187,15 @@ export const adminApi = {
       throw new Error(handleApiError(error));
     }
   },
+
+  async downloadAnalyticsReport(): Promise<Blob> {
+    try {
+      const response = await api.get("/admin/analytics/export", {
+        responseType: "blob",
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(handleApiError(error));
+    }
+  },
 };

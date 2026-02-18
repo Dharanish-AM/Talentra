@@ -4,16 +4,26 @@ import { useDataStore } from "@/store/dataStore";
 import PageHeader from "@/components/shared/PageHeader";
 import StatCard from "@/components/shared/StatCard";
 import StatusBadge from "@/components/shared/StatusBadge";
-import { Building2, Briefcase, Users, Award, Plus } from "lucide-react";
+import { adminApi } from "@/services/admin.api";
+import {
+  Building2,
+  Briefcase,
+  Users,
+  Award,
+  Plus,
+  Download,
+} from "lucide-react";
 import CreateDriveDialog from "@/components/modals/CreateDriveDialog";
 import ViewApplicantDialog from "@/components/modals/ViewApplicantDialog";
 import { Application } from "@/types";
+import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 
 export default function AdminDashboard() {
   const { drives, applications, companies } = useDataStore();
   const [showCreate, setShowCreate] = useState(false);
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
+  const [isExporting, setIsExporting] = useState(false);
 
   const [visibleDrivesCount, setVisibleDrivesCount] = useState(5);
   const visibleDrives = drives.slice(0, visibleDrivesCount);
@@ -21,15 +31,54 @@ export default function AdminDashboard() {
   const [visibleAppsCount, setVisibleAppsCount] = useState(5);
   const visibleApps = applications.slice(0, visibleAppsCount);
 
+  const handleExport = async () => {
+    try {
+      setIsExporting(true);
+      const blob = await adminApi.downloadAnalyticsReport();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `placement-report-${new Date().toISOString().split("T")[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      toast({
+        title: "Export Successful",
+        description: "Analytics report has been downloaded.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Export Failed",
+        description:
+          error instanceof Error ? error.message : "Failed to download report",
+      });
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   return (
     <div>
       <PageHeader
         title="Placement Dashboard"
         description="Overview of campus recruitment activities."
         action={
-          <Button onClick={() => setShowCreate(true)} className="gap-2">
-            <Plus className="h-4 w-4" /> New Drive
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              className="gap-2"
+              onClick={handleExport}
+              disabled={isExporting}
+            >
+              <Download className="h-4 w-4" />
+              {isExporting ? "Exporting..." : "Export Data"}
+            </Button>
+            <Button onClick={() => setShowCreate(true)} className="gap-2">
+              <Plus className="h-4 w-4" /> New Drive
+            </Button>
+          </div>
         }
       />
 

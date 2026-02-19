@@ -9,6 +9,7 @@ import FeedbackDialog from "@/components/modals/FeedbackDialog";
 import { UserCheck, Calendar, ClipboardList, CheckCircle } from "lucide-react";
 import { InterviewSlot } from "@/types";
 import { Button } from "@/components/ui/button";
+import RecruiterAnalytics from "@/components/recruiter/RecruiterAnalytics";
 import { toast } from "@/hooks/use-toast";
 
 export default function RecruiterDashboard() {
@@ -71,6 +72,8 @@ export default function RecruiterDashboard() {
           delay={300}
         />
       </div>
+
+      <RecruiterAnalytics interviews={interviews} applications={shortlisted} />
 
       <div className="mt-8 animate-fade-in" style={{ animationDelay: "400ms" }}>
         <h2 className="mb-4 font-display text-lg font-semibold text-foreground">

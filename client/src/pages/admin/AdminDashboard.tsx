@@ -18,6 +18,7 @@ import ViewApplicantDialog from "@/components/modals/ViewApplicantDialog";
 import { Application } from "@/types";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import DashboardAnalytics from "@/components/admin/DashboardAnalytics";
 
 export default function AdminDashboard() {
   const { drives, applications, companies } = useDataStore();
@@ -114,6 +115,12 @@ export default function AdminDashboard() {
           delay={300}
         />
       </div>
+
+      <DashboardAnalytics
+        applications={applications}
+        drives={drives}
+        companies={companies}
+      />
 
       <div className="mt-8 animate-fade-in" style={{ animationDelay: "400ms" }}>
         <h2 className="mb-4 font-display text-lg font-semibold text-foreground">

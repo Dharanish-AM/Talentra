@@ -40,10 +40,11 @@ export default function AppSidebar() {
   const { user, logout } = useAuthStore();
   const location = useLocation();
 
+  const role = user?.role?.toLowerCase();
   const links =
-    user?.role === "admin"
+    role === "admin"
       ? adminLinks
-      : user?.role === "recruiter"
+      : role === "recruiter"
         ? recruiterLinks
         : studentLinks;
 

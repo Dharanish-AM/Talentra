@@ -6,7 +6,8 @@ import RecruiterDashboard from './recruiter/RecruiterDashboard';
 export default function Dashboard() {
   const { user } = useAuthStore();
 
-  if (user?.role === 'admin') return <AdminDashboard />;
-  if (user?.role === 'recruiter') return <RecruiterDashboard />;
+  const role = user?.role?.toLowerCase();
+  if (role === 'admin') return <AdminDashboard />;
+  if (role === 'recruiter') return <RecruiterDashboard />;
   return <StudentDashboard />;
 }

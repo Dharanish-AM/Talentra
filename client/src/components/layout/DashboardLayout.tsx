@@ -22,20 +22,21 @@ export default function DashboardLayout() {
     if (!user) return;
 
     const loadData = async () => {
-      if (user.role === "admin") {
+      const role = user.role?.toLowerCase();
+      if (role === "admin") {
         await Promise.all([
           fetchCompanies(),
           fetchDrives(),
           fetchAllApplications(),
           fetchAllInterviews(),
         ]);
-      } else if (user.role === "student") {
+      } else if (role === "student") {
         await Promise.all([
           fetchEligibleDrives(),
           fetchApplications(),
           fetchStudentInterviews(),
         ]);
-      } else if (user.role === "recruiter") {
+      } else if (role === "recruiter") {
         await Promise.all([fetchInterviews(), fetchRecruiterApplications()]);
       }
     };

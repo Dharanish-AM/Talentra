@@ -67,8 +67,11 @@ export default function DashboardAnalytics({
   // Group applications by date applied
   const appsByDate: Record<string, number> = {};
   applications.forEach((app) => {
-    const date = app.appliedAt.split("T")[0]; // YYYY-MM-DD
-    appsByDate[date] = (appsByDate[date] || 0) + 1;
+    const d = new Date(app.appliedAt);
+    if (!isNaN(d.getTime())) {
+      const dateKey = d.toISOString().split("T")[0]; // YYYY-MM-DD
+      appsByDate[dateKey] = (appsByDate[dateKey] || 0) + 1;
+    }
   });
 
   // Convert to array and sort by date

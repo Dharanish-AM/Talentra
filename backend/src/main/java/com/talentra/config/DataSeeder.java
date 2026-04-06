@@ -39,25 +39,25 @@ public class DataSeeder implements CommandLineRunner {
     // ================= ENTRY =================
     @Override
     public void run(String... args) {
-        if (userRepo.count() > 0) {
-            System.out.println("⚠️ Data already exists. Skipping seeding.");
+        // Ensure Admin exists
+        if (userRepo.findByEmail("admin@mail.com").isEmpty()) {
+            createUser("Admin", "admin@mail.com", "1234", Role.ADMIN);
+            System.out.println("👑 Created default Admin account: admin@mail.com / 1234");
+        }
+
+        if (userRepo.count() > 1) { // 1 because admin was just created or already existed
+            System.out.println("⚠️ Production data already exists. Skipping bulk seeding.");
             return;
         }
 
-        System.out.println("🚀 Starting production data seeding...");
+        System.out.println("🚀 Starting full production data seeding...");
 
-        createAdmin();
         List<Company> companies = seedCompanies();
         List<JobProfile> jobs = seedJobs(companies);
         List<StudentProfile> students = seedStudents();
         seedApplications(students, jobs);
 
         System.out.println("✅ Production data seeding completed");
-    }
-
-    // ================= ADMIN =================
-    private void createAdmin() {
-        createUser("Admin", "admin@talentra.com", "admin123", Role.ADMIN);
     }
 
     // ================= COMPANIES =================
@@ -78,7 +78,7 @@ public class DataSeeder implements CommandLineRunner {
         c.setWebsite("https://" + domain);
         c.setContactEmail("hr@" + domain);
         c = companyRepo.save(c);
-
+        
         createUser(name + " Recruiter", "hr@" + domain, "1234", Role.RECRUITER);
         return c;
     }
@@ -128,8 +128,10 @@ public class DataSeeder implements CommandLineRunner {
             s.setUser(u);
             s.setDepartment(DEPARTMENTS.get(i % DEPARTMENTS.size()));
             s.setCgpa(cgpa);
+            s.setBacklogs(i % 3);
+            s.setPhone("9" + String.format("%09d", i));
+            s.setGraduationYear(2024 + (i % 4));
             s.setSkills(String.join(", ", skills));
-            s.setResumeUrl("https://resumes/student" + i + ".pdf");
 
             students.add(s);
         }

@@ -13,6 +13,7 @@
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/config/WebConfig.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/security/CustomUserDetailsService.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/service/StudentProfileService.java
+/Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/StudentProfileRequest.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/BulkActionRequest.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/LoginRequest.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java
@@ -39,6 +40,7 @@
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/AuthController.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/CompanyRequest.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/entity/InterviewStatus.java
+/Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/StudentProfileResponse.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/JobProfileRequest.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/entity/Company.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/repository/UserRepository.java

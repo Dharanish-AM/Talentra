@@ -31,6 +31,26 @@ public class ApplicationService {
         JobProfile job = jobProfileRepository.findById(request.getJobProfileId())
                 .orElseThrow(() -> new RuntimeException("Job Profile not found"));
 
+        // AFL (Eligibility Checks)
+        if (student.getCgpa() < job.getMinCgpa()) {
+            throw new RuntimeException("Ineligible: Your CGPA (" + student.getCgpa() + ") is below the required " + job.getMinCgpa());
+        }
+
+        if (job.getMaxBacklogs() != null && student.getBacklogs() != null && student.getBacklogs() > job.getMaxBacklogs()) {
+            throw new RuntimeException("Ineligible: Your backlog count (" + student.getBacklogs() + ") exceeds the allowed maximum of " + job.getMaxBacklogs());
+        }
+
+        if (job.getAllowedDepartments() != null && !job.getAllowedDepartments().isEmpty()) {
+            String[] allowedDepts = job.getAllowedDepartments().split(",");
+            boolean isAllowed = java.util.Arrays.stream(allowedDepts)
+                    .map(String::trim)
+                    .anyMatch(dept -> dept.equalsIgnoreCase(student.getDepartment()));
+            
+            if (!isAllowed) {
+                throw new RuntimeException("Ineligible: Your department (" + student.getDepartment() + ") is not eligible for this drive (" + job.getAllowedDepartments() + ")");
+            }
+        }
+
         Application application = new Application();
         application.setStudentProfile(student);
         application.setJobProfile(job);

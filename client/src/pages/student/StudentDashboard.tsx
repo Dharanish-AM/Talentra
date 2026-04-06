@@ -97,7 +97,7 @@ export default function StudentDashboard() {
                     <StatusBadge status={app.status} />
                   </td>
                   <td className="px-6 py-4 text-sm text-muted-foreground">
-                    {app.appliedAt}
+                    {formatDate(app.appliedAt)}
                   </td>
                 </tr>
               ))}
@@ -145,7 +145,7 @@ export default function StudentDashboard() {
               <div className="mt-3 flex flex-wrap gap-3 text-xs text-muted-foreground">
                 <span>💰 {drive.package}</span>
                 <span>📍 {drive.location}</span>
-                <span>📅 Deadline: {drive.deadline}</span>
+                <span>📅 Deadline: {formatDate(drive.deadline)}</span>
               </div>
               <div className="mt-3 text-xs text-muted-foreground">
                 Min CGPA: {drive.eligibility.minCgpa} ·{" "}

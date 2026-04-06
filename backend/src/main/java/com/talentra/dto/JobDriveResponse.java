@@ -52,10 +52,13 @@ public class JobDriveResponse {
         Eligibility el = new Eligibility();
         el.setMinCgpa(job.getMinCgpa() != null ? job.getMinCgpa() : 0.0);
         el.setMaxBacklogs(job.getMaxBacklogs() != null ? job.getMaxBacklogs() : 0);
-        if (job.getAllowedDepartments() != null) {
-            el.setAllowedDepartments(Arrays.asList(job.getAllowedDepartments().split(",")));
+        if (job.getAllowedDepartments() != null && !job.getAllowedDepartments().isEmpty()) {
+            el.setAllowedDepartments(Arrays.stream(job.getAllowedDepartments().split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(java.util.stream.Collectors.toList()));
         } else {
-            el.setAllowedDepartments(Arrays.asList("All"));
+            el.setAllowedDepartments(List.of("All"));
         }
         resp.setEligibility(el);
         

@@ -74,14 +74,13 @@ export default function StudentProfile() {
 
   const handleViewResume = () => {
     if (profile?.resumeUrl) {
-      // Clean path separators (replace backslashes with forward slashes)
+      if (profile.resumeUrl.startsWith("http")) {
+        window.open(profile.resumeUrl, "_blank");
+        return;
+      }
+      
       const cleanPath = profile.resumeUrl.replace(/\\/g, "/");
-      // Get base URL (remove /api from the end if present)
-      const baseUrl =
-        import.meta.env.VITE_API_BASE_URL?.replace("/api", "") ||
-        "http://localhost:8000";
-
-      // Construct full URL
+      const baseUrl = import.meta.env.VITE_API_BASE_URL?.replace("/api", "") || "http://localhost:8000";
       const url = `${baseUrl}/${cleanPath}`;
       window.open(url, "_blank");
     }

@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
 import { StudentProfile } from '@/types';
+import { studentApi } from '@/services/student.api';
 
 interface Props {
   open: boolean;
@@ -28,10 +29,19 @@ export default function EditProfileDialog({ open, onOpenChange, profile, onSave 
     setForm({ ...form, skills: form.skills.filter((s) => s !== skill) });
   };
 
-  const handleSubmit = () => {
-    onSave(form);
-    toast({ title: 'Profile updated', description: 'Your profile has been saved.' });
-    onOpenChange(false);
+  const handleSubmit = async () => {
+    try {
+      const updatedProfile = await studentApi.updateProfile(form);
+      onSave(updatedProfile);
+      toast({ title: 'Profile updated', description: 'Your profile has been saved successfully.' });
+      onOpenChange(false);
+    } catch (error) {
+      toast({ 
+        title: 'Update failed', 
+        description: error instanceof Error ? error.message : 'Failed to update profile', 
+        variant: 'destructive' 
+      });
+    }
   };
 
   return (

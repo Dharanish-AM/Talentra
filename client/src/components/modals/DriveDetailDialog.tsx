@@ -33,9 +33,9 @@ export default function DriveDetailDialog({
     (a) => a.studentId === user?.id && a.driveId === drive.id,
   );
 
-  const handleApply = () => {
+  const handleApply = async () => {
     if (!user) return;
-    const success = applyToDrive(user.id, user.name, drive);
+    const success = await applyToDrive(drive.id);
     if (success) {
       toast({
         title: "Application submitted!",
@@ -81,11 +81,15 @@ export default function DriveDetailDialog({
             </div>
             <div>
               <span className="font-medium text-foreground">Drive Date:</span>{" "}
-              <span className="text-muted-foreground">{drive.driveDate}</span>
+              <span className="text-muted-foreground">
+                {formatDate(drive.driveDate)}
+              </span>
             </div>
             <div>
               <span className="font-medium text-foreground">Deadline:</span>{" "}
-              <span className="text-muted-foreground">{drive.deadline}</span>
+              <span className="text-muted-foreground">
+                {formatDate(drive.deadline)}
+              </span>
             </div>
             <div>
               <span className="font-medium text-foreground">Min CGPA:</span>{" "}

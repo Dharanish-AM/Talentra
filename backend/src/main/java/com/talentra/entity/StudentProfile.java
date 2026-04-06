@@ -26,6 +26,12 @@ public class StudentProfile {
 
     private Double cgpa;
 
+    private Integer backlogs;
+
+    private String phone;
+
+    private Integer graduationYear;
+
     @Column(columnDefinition = "TEXT")
     private String skills;
 

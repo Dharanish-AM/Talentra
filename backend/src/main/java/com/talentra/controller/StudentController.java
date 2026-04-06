@@ -45,36 +45,42 @@ public class StudentController {
         
         Application application = applicationService.applyToJob(request);
         Map<String, Object> data = new HashMap<>();
-        data.put("application", application);
+        data.put("application", ApplicationResponse.fromEntity(application));
         return ResponseEntity.ok(ApiResponse.success(data, "Application submitted"));
     }
-
     @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/applications")
     public ResponseEntity<?> getMyApplications(Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
         StudentProfile profile = profileService.getStudentProfileByUserId(user.getId());
-        List<Application> applications = applicationService.getApplicationsByStudent(profile.getId());
+        List<ApplicationResponse> applications = applicationService.getApplicationsByStudent(profile.getId())
+            .stream()
+            .map(ApplicationResponse::fromEntity)
+            .toList();
         java.util.Map<String, Object> data = new java.util.HashMap<>();
         data.put("applications", applications);
         return ResponseEntity.ok(ApiResponse.success(data));
     }
-
     @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/drives")
     public ResponseEntity<?> getEligibleDrives() {
-        List<JobProfile> drives = jobService.getAllJobProfiles();
+        List<JobDriveResponse> drives = jobService.getAllJobProfiles()
+            .stream()
+            .map(JobDriveResponse::fromEntity)
+            .toList();
         java.util.Map<String, Object> data = new java.util.HashMap<>();
         data.put("drives", drives);
         return ResponseEntity.ok(ApiResponse.success(data));
     }
-
     @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/interviews")
     public ResponseEntity<?> getMyInterviews(Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
         StudentProfile profile = profileService.getStudentProfileByUserId(user.getId());
-        List<InterviewRound> interviews = interviewService.getInterviewsByStudent(profile.getId());
+        List<InterviewResponse> interviews = interviewService.getInterviewsByStudent(profile.getId())
+            .stream()
+            .map(InterviewResponse::fromEntity)
+            .toList();
         java.util.Map<String, Object> data = new java.util.HashMap<>();
         data.put("interviews", interviews);
         return ResponseEntity.ok(ApiResponse.success(data));
@@ -82,11 +88,11 @@ public class StudentController {
 
     @PreAuthorize("hasRole('STUDENT')")
     @PutMapping("/profile")
-    public ResponseEntity<?> updateProfile(Authentication authentication, @RequestBody StudentProfile details) {
+    public ResponseEntity<?> updateProfile(Authentication authentication, @RequestBody StudentProfileRequest details) {
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
         StudentProfile profile = profileService.createOrUpdateProfile(user.getId(), details);
         Map<String, Object> data = new HashMap<>();
-        data.put("profile", profile);
+        data.put("profile", StudentProfileResponse.fromEntity(profile));
         return ResponseEntity.ok(ApiResponse.success(data, "Profile updated"));
     }
 
@@ -96,7 +102,7 @@ public class StudentController {
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
         StudentProfile profile = profileService.getStudentProfileByUserId(user.getId());
         Map<String, Object> data = new HashMap<>();
-        data.put("profile", profile);
+        data.put("profile", StudentProfileResponse.fromEntity(profile));
         return ResponseEntity.ok(ApiResponse.success(data));
     }
 
@@ -104,14 +110,14 @@ public class StudentController {
     @PostMapping("/profile/resume")
     public ResponseEntity<?> uploadResume(Authentication authentication, @RequestParam("resume") MultipartFile file) {
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
-        StudentProfile profile = profileService.getStudentProfileByUserId(user.getId());
         
-        // Mocking resume upload for now - set a dummy URL
-        profile.setResumeUrl("resumes/" + file.getOriginalFilename());
-        profileService.createOrUpdateProfile(user.getId(), profile);
+        StudentProfileRequest request = new StudentProfileRequest();
+        request.setResumeUrl("resumes/" + file.getOriginalFilename());
+        
+        StudentProfile profile = profileService.createOrUpdateProfile(user.getId(), request);
         
         Map<String, Object> data = new HashMap<>();
-        data.put("profile", profile);
+        data.put("profile", StudentProfileResponse.fromEntity(profile));
         return ResponseEntity.ok(ApiResponse.success(data, "Resume uploaded successfully"));
     }
 }

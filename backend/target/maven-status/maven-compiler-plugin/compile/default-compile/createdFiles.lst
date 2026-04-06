@@ -34,11 +34,13 @@ com/talentra/dto/BulkActionRequest.class
 com/talentra/repository/JobProfileRepository.class
 com/talentra/dto/JobDriveResponse.class
 com/talentra/entity/Application.class
+com/talentra/dto/StudentProfileRequest.class
 com/talentra/dto/AuthResponse.class
 com/talentra/entity/InterviewRound.class
 com/talentra/service/ReportService.class
 com/talentra/controller/AuthController.class
 com/talentra/entity/InterviewStatus.class
+com/talentra/dto/StudentProfileResponse.class
 com/talentra/dto/InterviewRequest.class
 com/talentra/dto/JobDriveResponse$Eligibility.class
 com/talentra/dto/InterviewResponse$1.class

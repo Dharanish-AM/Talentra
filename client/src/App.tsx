@@ -58,16 +58,55 @@ const App = () => {
               }
             >
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/drives" element={<DrivesPage />} />
-              <Route path="/applications" element={<ApplicationsPage />} />
-              <Route path="/profile" element={<StudentProfile />} />
-              <Route path="/companies" element={<CompaniesPage />} />
+              <Route
+                path="/drives"
+                element={
+                  <ProtectedRoute allowedRoles={["student", "admin"]}>
+                    <DrivesPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/applications"
+                element={
+                  <ProtectedRoute allowedRoles={["student"]}>
+                    <ApplicationsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute allowedRoles={["student"]}>
+                    <StudentProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/companies"
+                element={
+                  <ProtectedRoute allowedRoles={["admin"]}>
+                    <CompaniesPage />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/applicants"
-                element={<ApplicantsPage initialFilter="all" />}
+                element={
+                  <ProtectedRoute allowedRoles={["admin", "recruiter"]}>
+                    <ApplicantsPage initialFilter="all" />
+                  </ProtectedRoute>
+                }
               />
               <Route path="/interviews" element={<InterviewsPage />} />
-              <Route path="/candidates" element={<CandidatesPageWrapper />} />
+              <Route
+                path="/candidates"
+                element={
+                  <ProtectedRoute allowedRoles={["admin", "recruiter"]}>
+                    <CandidatesPageWrapper />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
 
             <Route path="*" element={<NotFound />} />

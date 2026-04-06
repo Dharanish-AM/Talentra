@@ -1,5 +1,6 @@
 package com.talentra.service;
 
+import com.talentra.dto.StudentProfileRequest;
 import com.talentra.entity.StudentProfile;
 import com.talentra.entity.User;
 import com.talentra.repository.StudentProfileRepository;
@@ -21,7 +22,7 @@ public class StudentProfileService {
                 .orElseThrow(() -> new RuntimeException("Student Profile not found"));
     }
 
-    public StudentProfile createOrUpdateProfile(Long userId, StudentProfile profileDetails) {
+    public StudentProfile createOrUpdateProfile(Long userId, StudentProfileRequest request) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -29,10 +30,17 @@ public class StudentProfileService {
                 .orElse(new StudentProfile());
 
         profile.setUser(user);
-        if (profileDetails.getDepartment() != null) profile.setDepartment(profileDetails.getDepartment());
-        if (profileDetails.getCgpa() != null) profile.setCgpa(profileDetails.getCgpa());
-        if (profileDetails.getSkills() != null) profile.setSkills(profileDetails.getSkills());
-        if (profileDetails.getResumeUrl() != null) profile.setResumeUrl(profileDetails.getResumeUrl());
+        if (request.getDepartment() != null) profile.setDepartment(request.getDepartment());
+        if (request.getCgpa() != null) profile.setCgpa(request.getCgpa());
+        if (request.getBacklogs() != null) profile.setBacklogs(request.getBacklogs());
+        if (request.getPhone() != null) profile.setPhone(request.getPhone());
+        if (request.getGraduationYear() != null) profile.setGraduationYear(request.getGraduationYear());
+        if (request.getSkills() != null && !request.getSkills().isEmpty()) {
+            profile.setSkills(String.join(", ", request.getSkills()));
+        } else if (request.getSkills() != null) {
+            profile.setSkills("");
+        }
+        if (request.getResumeUrl() != null) profile.setResumeUrl(request.getResumeUrl());
 
         return studentProfileRepository.save(profile);
     }

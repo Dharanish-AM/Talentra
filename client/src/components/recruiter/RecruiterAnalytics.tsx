@@ -47,8 +47,10 @@ export default function RecruiterAnalytics({
   const interviewsByDate: Record<string, number> = {};
 
   interviews.forEach((i) => {
-    if (i.date) {
-      interviewsByDate[i.date] = (interviewsByDate[i.date] || 0) + 1;
+    const d = new Date(i.date);
+    if (!isNaN(d.getTime())) {
+      const dateKey = d.toISOString().split("T")[0]; // YYYY-MM-DD for grouping
+      interviewsByDate[dateKey] = (interviewsByDate[dateKey] || 0) + 1;
     }
   });
 
@@ -178,6 +180,7 @@ export default function RecruiterAnalytics({
                 axisLine={false}
                 tickFormatter={(value) => {
                   const date = new Date(value);
+                  if (isNaN(date.getTime())) return value;
                   return `${date.getDate()}/${date.getMonth() + 1}`;
                 }}
               />

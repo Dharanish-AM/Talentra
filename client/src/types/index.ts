@@ -68,6 +68,7 @@ export interface Application {
   status: ApplicationStatus;
   appliedAt: string;
   updatedAt: string;
+  resumeUrl?: string;
 }
 
 export interface InterviewSlot {

@@ -7506,3 +7506,150 @@ WARNING: Unmatched cancel notification for request id 2
 2026.04.01 15:46:26 INFO  empty definition using pc, found symbol in pc:  (full report at: "/Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/.reports/metals-full/2026-04-01/r_empty-definition_(talentra-backend)_15-46-26-645.md")
 2026.04.01 15:47:57 INFO  compiling talentra-backend (1 java source)
 2026.04.01 15:47:57 INFO  time: compiled talentra-backend in 0.74s
+2026.04.03 13:19:16 INFO  Started: Metals version 1.6.6 in folders '/Users/dharanisham/Developer/Github-Repositories/Talentra' for client Visual Studio Code 1.114.0.
+2026.04.03 13:19:16 INFO  Memory monitor started
+2026.04.03 13:19:20 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.03 13:19:20 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/AdminController.java. Using fallback presentation compiler.
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+2026.04.03 13:19:20 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/AdminController.java. Using fallback presentation compiler.
+2026.04.03 13:19:21 INFO  Attempting to connect to the build server...
+2026.04.03 13:19:21 INFO  Found a Bloop server running
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 6
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7
+2026.04.03 13:19:20 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/AuthController.java. Using fallback presentation compiler.
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8
+2026.04.03 13:19:21 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/AuthController.java. Using fallback presentation compiler.
+2026.04.03 13:19:20 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/AuthController.java. Using fallback presentation compiler.
+2026.04.03 13:19:20 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/AuthController.java. Using fallback presentation compiler.
+2026.04.03 13:19:21 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/bsp.trace.json or /Users/dharanisham/Library/Caches/org.scalameta.metals/bsp.trace.json
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 11
+2026.04.03 13:19:20 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/JobController.java. Using fallback presentation compiler.
+2026.04.03 13:19:21 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/JobController.java. Using fallback presentation compiler.
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17
+2026.04.03 13:19:20 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/JobController.java. Using fallback presentation compiler.
+2026.04.03 13:19:21 INFO  time: Connected to build server in 0.23s
+2026.04.03 13:19:21 INFO  Connected to Build server: Bloop v2.0.19
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 21
+2026.04.03 13:19:20 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/JobController.java. Using fallback presentation compiler.
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 25
+2026.04.03 13:19:21 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/JobController.java. Using fallback presentation compiler.
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 20
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 22
+2026.04.03 13:19:21 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/StudentController.java. Using fallback presentation compiler.
+2026.04.03 13:19:21 INFO  time: Imported build in 0.18s
+2026.04.03 13:19:21 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/StudentController.java. Using fallback presentation compiler.
+2026.04.03 13:19:21 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/StudentController.java. Using fallback presentation compiler.
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 28
+Apr 03, 2026 1:19:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 32
+2026.04.03 13:19:24 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.03 13:19:24 INFO  time: indexed workspace in 3.08s
+2026.04.03 13:19:24 INFO  compiling talentra-backend (49 java sources)
+2026.04.03 13:19:26 INFO  time: compiled talentra-backend in 1.81s
+2026.04.03 16:24:11 INFO  Shutting down server
+2026.04.03 16:24:11 INFO  Memory monitor stopped
+2026.04.03 16:24:11 INFO  shutting down Metals
+2026.04.03 16:24:11 INFO  Shut down connection with build server.
+2026.04.03 16:24:11 INFO  Exiting server
+2026.04.03 16:41:44 INFO  Started: Metals version 1.6.6 in folders '/Users/dharanisham/Developer/Github-Repositories/Talentra' for client Visual Studio Code 1.114.0.
+2026.04.03 18:08:26 INFO  Started: Metals version 1.6.6 in folders '/Users/dharanisham/Developer/Github-Repositories/Talentra' for client Visual Studio Code 1.114.0.
+2026.04.03 18:08:26 INFO  Memory monitor started
+2026.04.03 18:08:26 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.03 18:08:26 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/StudentController.java. Using fallback presentation compiler.
+Apr 03, 2026 6:08:27 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+2026.04.03 18:08:27 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/StudentController.java. Using fallback presentation compiler.
+2026.04.03 18:08:27 INFO  Attempting to connect to the build server...
+2026.04.03 18:08:27 INFO  Found a Bloop server running
+2026.04.03 18:08:27 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/bsp.trace.json or /Users/dharanisham/Library/Caches/org.scalameta.metals/bsp.trace.json
+2026.04.03 18:08:27 INFO  time: Connected to build server in 0.2s
+2026.04.03 18:08:27 INFO  Connected to Build server: Bloop v2.0.19
+Apr 03, 2026 6:08:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8
+Apr 03, 2026 6:08:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5
+Apr 03, 2026 6:08:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 16
+Apr 03, 2026 6:08:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 18
+2026.04.03 18:08:31 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.03 18:08:31 INFO  time: indexed workspace in 4.22s
+2026.04.03 18:16:39 INFO  Shutting down server
+2026.04.03 18:16:39 INFO  Memory monitor stopped
+2026.04.03 18:16:39 INFO  shutting down Metals
+2026.04.03 18:16:39 INFO  Shut down connection with build server.
+2026.04.03 18:16:39 INFO  Exiting server
+2026.04.06 10:26:26 INFO  Started: Metals version 1.6.6 in folders '/Users/dharanisham/Developer/Github-Repositories/Talentra' for client Antigravity 1.107.0.
+2026.04.06 10:26:26 INFO  Memory monitor started
+2026.04.06 10:26:26 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.06 10:26:26 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/config/DataSeeder.java. Using fallback presentation compiler.
+2026.04.06 10:26:27 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/config/DataSeeder.java. Using fallback presentation compiler.
+2026.04.06 10:26:27 INFO  Attempting to connect to the build server...
+2026.04.06 10:26:27 INFO  Found a Bloop server running
+2026.04.06 10:26:27 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/bsp.trace.json or /Users/dharanisham/Library/Caches/org.scalameta.metals/bsp.trace.json
+2026.04.06 10:26:27 INFO  time: Connected to build server in 0.16s
+2026.04.06 10:26:27 INFO  Connected to Build server: Bloop v2.0.19
+2026.04.06 10:26:27 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/config/DataSeeder.java. Using fallback presentation compiler.
+2026.04.06 10:26:27 INFO  time: Imported build in 0.1s
+2026.04.06 10:26:29 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.06 10:26:29 INFO  time: indexed workspace in 1.94s
+2026.04.06 10:31:47 INFO  compiling talentra-backend (1 java source)
+2026.04.06 10:31:47 WARN  javac exited with exit code 1
+2026.04.06 10:31:47 INFO  time: compiled talentra-backend in 0.79s
+2026.04.06 10:31:57 INFO  compiling talentra-backend (2 java sources)
+2026.04.06 10:31:57 INFO  time: compiled talentra-backend in 0.85s
+2026.04.06 10:31:57 INFO  compiling talentra-backend (8 java sources)
+2026.04.06 10:31:59 INFO  time: compiled talentra-backend in 0.94s
+2026.04.06 10:32:20 INFO  compiling talentra-backend (1 java source)
+2026.04.06 10:32:20 INFO  compiling talentra-backend-test (1 java source)
+2026.04.06 10:32:20 INFO  time: compiled talentra-backend in 0.84s
+2026.04.06 10:32:21 INFO  time: compiled talentra-backend-test in 0.63s
+2026.04.06 12:44:19 INFO  compiling talentra-backend (2 java sources)
+2026.04.06 12:44:19 INFO  time: compiled talentra-backend in 0.91s
+2026.04.06 12:44:28 INFO  compiling talentra-backend (1 java source)
+2026.04.06 12:44:28 INFO  time: compiled talentra-backend in 0.72s
+2026.04.06 12:44:38 INFO  compiling talentra-backend (1 java source)
+2026.04.06 12:44:38 INFO  time: compiled talentra-backend in 0.64s
+2026.04.06 12:44:58 INFO  compiling talentra-backend (1 java source)
+2026.04.06 12:44:58 INFO  time: compiled talentra-backend in 0.66s
+2026.04.06 12:44:58 INFO  compiling talentra-backend (1 java source)
+2026.04.06 12:44:59 WARN  javac exited with exit code 1
+2026.04.06 12:44:59 INFO  time: compiled talentra-backend in 0.57s
+2026.04.06 12:45:09 INFO  compiling talentra-backend (2 java sources)
+2026.04.06 12:45:09 INFO  time: compiled talentra-backend in 0.83s
+2026.04.06 12:49:50 INFO  compiling talentra-backend (1 java source)
+2026.04.06 12:49:50 WARN  Could not load snapshot text for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/config/DataSeeder.java
+2026.04.06 12:49:50 INFO  time: compiled talentra-backend in 0.76s
+2026.04.06 12:52:07 INFO  compiling talentra-backend (2 java sources)
+2026.04.06 12:52:07 INFO  time: compiled talentra-backend in 0.67s
+2026.04.06 12:52:34 INFO  compiling talentra-backend (1 java source)
+2026.04.06 12:52:34 INFO  time: compiled talentra-backend in 0.76s
+2026.04.06 12:59:48 INFO  compiling talentra-backend (3 java sources)
+2026.04.06 12:59:48 INFO  time: compiled talentra-backend in 0.85s
+2026.04.06 12:59:48 INFO  compiling talentra-backend (9 java sources)
+2026.04.06 12:59:50 INFO  time: compiled talentra-backend in 1.08s
+2026.04.06 13:00:02 INFO  compiling talentra-backend (1 java source)
+2026.04.06 13:00:02 INFO  time: compiled talentra-backend in 0.72s
+2026.04.06 19:14:04 INFO  compiling talentra-backend (2 java sources)
+2026.04.06 19:14:04 INFO  time: compiled talentra-backend in 0.91s
+2026.04.06 19:14:17 INFO  compiling talentra-backend (1 java source)
+2026.04.06 19:14:17 INFO  time: compiled talentra-backend in 0.62s
+2026.04.06 21:12:11 INFO  compiling talentra-backend (51 java sources)
+2026.04.06 21:12:12 INFO  time: compiled talentra-backend in 1.58s

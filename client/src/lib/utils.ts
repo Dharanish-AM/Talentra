@@ -7,10 +7,22 @@ export function cn(...inputs: ClassValue[]) {
 
 import { format } from "date-fns";
 
-export function formatDate(dateString: string | Date): string {
-  if (!dateString) return "";
-  const date = new Date(dateString);
-  // Check if date is valid
-  if (isNaN(date.getTime())) return String(dateString); // Fallback to original string
+export function formatDate(dateValue: string | number | Date): string {
+  if (!dateValue) return "";
+  
+  let date: Date;
+  if (typeof dateValue === "number") {
+    date = new Date(dateValue);
+  } else if (typeof dateValue === "string") {
+    if (/^\d+$/.test(dateValue)) {
+      date = new Date(parseInt(dateValue, 10));
+    } else {
+      date = new Date(dateValue);
+    }
+  } else {
+    date = dateValue;
+  }
+
+  if (isNaN(date.getTime())) return String(dateValue);
   return format(date, "MMM dd, yyyy");
 }

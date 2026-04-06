@@ -91,7 +91,7 @@ export default function RecruiterDashboard() {
                     {interview.studentName}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    {interview.date} · {interview.time}
+                    {formatDate(interview.date)} · {interview.time}
                   </p>
                 </div>
                 <StatusBadge status={interview.result || "pending"} />

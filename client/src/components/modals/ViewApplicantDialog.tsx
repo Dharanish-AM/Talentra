@@ -59,6 +59,23 @@ export default function ViewApplicantDialog({
             Applied: {formatDate(application.appliedAt)} · Updated:{" "}
             {formatDate(application.updatedAt)}
           </div>
+          {application.resumeUrl && (
+            <div className="pt-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full"
+                onClick={() =>
+                  window.open(
+                    `http://localhost:8000/resumes/${application.resumeUrl}`,
+                    "_blank",
+                  )
+                }
+              >
+                View Resume
+              </Button>
+            </div>
+          )}
         </div>
         <DialogFooter className="flex-wrap gap-2">
           {application.status === "applied" && (

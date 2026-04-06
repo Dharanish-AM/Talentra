@@ -15,6 +15,7 @@ public class ApplicationResponse {
     private String status;
     private String appliedAt;
     private String updatedAt;
+    private String resumeUrl;
 
     public static ApplicationResponse fromEntity(Application app) {
         ApplicationResponse resp = new ApplicationResponse();
@@ -23,6 +24,7 @@ public class ApplicationResponse {
         
         if (app.getStudentProfile() != null) {
             resp.setStudentId(app.getStudentProfile().getId().toString());
+            resp.setResumeUrl(app.getStudentProfile().getResumeUrl());
             if (app.getStudentProfile().getUser() != null) {
                 resp.setStudentName(app.getStudentProfile().getUser().getName());
             }

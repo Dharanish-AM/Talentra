@@ -36,6 +36,8 @@ public class Application {
 
     @PrePersist
     protected void onCreate() {
-        appliedAt = LocalDateTime.now();
+        if (appliedAt == null) {
+            appliedAt = LocalDateTime.now();
+        }
     }
 }

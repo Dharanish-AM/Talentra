@@ -25,6 +25,7 @@
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/AdminController.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/repository/JobProfileRepository.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/RegisterRequest.java
+/Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/RecruiterCandidateResponse.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/entity/Application.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/config/SecurityConfig.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/entity/InterviewRound.java
@@ -44,6 +45,7 @@
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/JobProfileRequest.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/entity/Company.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/repository/UserRepository.java
+/Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/RecruiterApplicationResponse.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/entity/JobProfile.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/service/AdminWorkflowService.java
 /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/CompanyResponse.java

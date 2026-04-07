@@ -7669,3 +7669,98 @@ Apr 07, 2026 8:54:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellat
 WARNING: Unmatched cancel notification for request id 275
 Apr 07, 2026 9:01:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 319
+2026.04.07 09:20:02 INFO  compiling talentra-backend (1 java source)
+2026.04.07 09:20:02 INFO  time: compiled talentra-backend in 0.9s
+2026.04.07 09:31:02 INFO  compiling talentra-backend (1 java source)
+2026.04.07 09:31:02 INFO  time: compiled talentra-backend in 0.72s
+2026.04.07 09:31:02 INFO  compiling talentra-backend (8 java sources)
+2026.04.07 09:31:04 WARN  javac exited with exit code 1
+2026.04.07 09:31:04 INFO  time: compiled talentra-backend in 0.8s
+2026.04.07 09:31:16 INFO  compiling talentra-backend (2 java sources)
+2026.04.07 09:31:16 INFO  time: compiled talentra-backend in 0.7s
+2026.04.07 09:31:16 INFO  compiling talentra-backend (9 java sources)
+2026.04.07 09:31:18 WARN  javac exited with exit code 1
+2026.04.07 09:31:18 INFO  time: compiled talentra-backend in 0.86s
+2026.04.07 09:31:18 INFO  compiling talentra-backend (3 java sources)
+2026.04.07 09:31:18 INFO  time: compiled talentra-backend in 0.75s
+2026.04.07 09:31:18 INFO  compiling talentra-backend (9 java sources)
+2026.04.07 09:31:19 WARN  javac exited with exit code 1
+2026.04.07 09:31:19 INFO  time: compiled talentra-backend in 0.91s
+2026.04.07 09:31:22 INFO  compiling talentra-backend (5 java sources)
+2026.04.07 09:31:22 INFO  time: compiled talentra-backend in 0.81s
+2026.04.07 09:31:22 INFO  compiling talentra-backend (9 java sources)
+2026.04.07 09:31:23 INFO  time: compiled talentra-backend in 0.89s
+2026.04.07 09:31:30 INFO  compiling talentra-backend (1 java source)
+2026.04.07 09:31:30 INFO  time: compiled talentra-backend in 0.68s
+2026.04.07 09:35:17 INFO  compiling talentra-backend (51 java sources)
+2026.04.07 09:35:18 INFO  time: compiled talentra-backend in 1.44s
+2026.04.07 09:35:28 INFO  compiling talentra-backend (1 java source)
+2026.04.07 09:35:28 INFO  time: compiled talentra-backend in 0.85s
+2026.04.07 09:41:24 INFO  compiling talentra-backend (2 java sources)
+2026.04.07 09:41:24 INFO  time: compiled talentra-backend in 0.8s
+2026.04.07 09:41:24 INFO  compiling talentra-backend (3 java sources)
+2026.04.07 09:41:26 INFO  time: compiled talentra-backend in 0.77s
+2026.04.07 09:51:14 INFO  compiling talentra-backend (51 java sources)
+2026.04.07 09:51:16 INFO  time: compiled talentra-backend in 1.45s
+2026.04.07 09:51:22 INFO  compiling talentra-backend (1 java source)
+2026.04.07 09:51:22 INFO  time: compiled talentra-backend in 0.74s
+2026.04.07 10:43:20 INFO  compiling talentra-backend (51 java sources)
+2026.04.07 10:43:22 INFO  time: compiled talentra-backend in 1.62s
+2026.04.07 11:01:16 INFO  compiling talentra-backend (52 java sources)
+2026.04.07 11:01:18 INFO  time: compiled talentra-backend in 1.53s
+2026.04.07 11:01:26 INFO  compiling talentra-backend (1 java source)
+2026.04.07 11:01:26 INFO  time: compiled talentra-backend in 0.64s
+2026.04.07 11:01:40 INFO  compiling talentra-backend (1 java source)
+2026.04.07 11:01:40 WARN  javac exited with exit code 1
+2026.04.07 11:01:40 INFO  time: compiled talentra-backend in 0.73s
+2026.04.07 11:08:18 INFO  file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java:39:34: stale bloop error:  error: cannot find symbol
+        return ResponseEntity.ok(ApiResponse.success(data));
+                                 ^
+2026.04.07 11:08:18 INFO  file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java:50:34: stale bloop error:  error: cannot find symbol
+        return ResponseEntity.ok(ApiResponse.success(data));
+                                 ^
+2026.04.07 11:08:18 INFO  file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java:61:34: stale bloop error:  error: cannot find symbol
+        return ResponseEntity.ok(ApiResponse.success(data));
+                                 ^
+2026.04.07 11:08:18 INFO  file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java:68:34: stale bloop error:  error: cannot find symbol
+        return ResponseEntity.ok(ApiResponse.success(application, "Status updated"));
+                                 ^
+2026.04.07 11:08:18 INFO  file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java:75:34: stale bloop error:  error: cannot find symbol
+        return ResponseEntity.ok(ApiResponse.success(round, "Interview scheduled"));
+                                 ^
+2026.04.07 11:08:18 INFO  file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java:84:34: stale bloop error:  error: cannot find symbol
+        return ResponseEntity.ok(ApiResponse.success(data, "Feedback submitted"));
+                                 ^
+2026.04.07 11:08:18 INFO  file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java:95:53: stale bloop error:  error: cannot find symbol
+            return ResponseEntity.badRequest().body(ApiResponse.error("ID cannot be null"));
+                                                    ^
+2026.04.07 11:08:18 INFO  file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java:106:34: stale bloop error:  error: cannot find symbol
+        return ResponseEntity.ok(ApiResponse.success(data, "Result updated"));
+                                 ^
+2026.04.07 11:08:18 INFO  compiling talentra-backend (53 java sources)
+2026.04.07 11:08:18 INFO  Created report: Optional[file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/RecruiterCandidateResponse.java]
+2026.04.07 11:08:18 INFO  Created report: Optional[file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java]
+2026.04.07 11:08:18 INFO  Created report: Optional[file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/RecruiterApplicationResponse.java]
+2026.04.07 11:08:18 INFO  QDox parse error in file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/RecruiterApplicationResponse.java (full report at: "/Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/.reports/metals-full/2026-04-07/r_qdox-error_(talentra-backend)_11-08-18-949.md")
+2026.04.07 11:08:18 INFO  QDox parse error in file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/dto/RecruiterCandidateResponse.java (full report at: "/Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/.reports/metals-full/2026-04-07/r_qdox-error_(talentra-backend)_11-08-18-906.md")
+2026.04.07 11:08:18 INFO  QDox parse error in file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/RecruiterController.java (full report at: "/Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/.reports/metals-full/2026-04-07/r_qdox-error_(talentra-backend)_11-08-18-906.md")
+2026.04.07 11:08:20 INFO  time: compiled talentra-backend in 1.41s
+2026.04.07 11:09:51 INFO  compiling talentra-backend (3 java sources)
+2026.04.07 11:09:52 INFO  time: compiled talentra-backend in 1.07s
+Apr 07, 2026 11:10:00 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 625
+2026.04.07 11:10:14 INFO  compiling talentra-backend (2 java sources)
+2026.04.07 11:10:14 WARN  javac exited with exit code 1
+2026.04.07 11:10:14 INFO  time: compiled talentra-backend in 0.77s
+2026.04.07 11:10:38 INFO  compiling talentra-backend (3 java sources)
+2026.04.07 11:10:38 INFO  time: compiled talentra-backend in 0.69s
+2026.04.07 11:10:38 INFO  compiling talentra-backend (7 java sources)
+2026.04.07 11:10:39 INFO  time: compiled talentra-backend in 0.87s
+2026.04.07 11:19:44 INFO  compiling talentra-backend (53 java sources)
+2026.04.07 11:19:46 INFO  time: compiled talentra-backend in 1.54s
+2026.04.07 11:19:57 INFO  compiling talentra-backend (1 java source)
+2026.04.07 11:19:57 INFO  time: compiled talentra-backend in 0.69s
+2026.04.07 11:20:09 INFO  compiling talentra-backend (1 java source)
+2026.04.07 11:20:09 INFO  time: compiled talentra-backend in 0.78s
+2026.04.07 11:20:21 INFO  compiling talentra-backend (1 java source)
+2026.04.07 11:20:21 INFO  time: compiled talentra-backend in 0.64s

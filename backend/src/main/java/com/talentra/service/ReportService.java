@@ -24,7 +24,7 @@ public class ReportService {
     public Map<String, Object> getPlacementStatistics() {
         Map<String, Object> stats = new HashMap<>();
         stats.put("totalStudents", studentRepository.count());
-        stats.put("totalJobOffers", applicationRepository.findByStatus(ApplicationStatus.OFFERED).size());
+        stats.put("totalJobOffers", applicationRepository.findByStatus(ApplicationStatus.OFFER).size());
         stats.put("activeJobProfiles", jobRepository.count());
         stats.put("totalApplications", applicationRepository.count());
         return stats;

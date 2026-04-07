@@ -22,7 +22,7 @@ export default function DashboardLayout() {
     if (!user) return;
 
     const loadData = async () => {
-      const role = user.role?.toLowerCase();
+      const role = user.role;
       if (role === "admin") {
         await Promise.all([
           fetchCompanies(),

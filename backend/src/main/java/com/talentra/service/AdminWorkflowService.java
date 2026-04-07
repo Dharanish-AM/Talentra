@@ -2,7 +2,6 @@ package com.talentra.service;
 
 import com.talentra.dto.BulkActionRequest;
 import com.talentra.dto.BulkInterviewRequest;
-import com.talentra.dto.InterviewRequest;
 import com.talentra.entity.*;
 import com.talentra.repository.ApplicationRepository;
 import com.talentra.repository.InterviewRoundRepository;
@@ -30,6 +29,7 @@ public class AdminWorkflowService {
 
     @Transactional
     public void shortlistApplicants(BulkActionRequest request) {
+        if (request.getApplicationIds() == null || request.getApplicationIds().isEmpty()) return;
         List<Application> applications = applicationRepository.findAllById(request.getApplicationIds());
         applications.forEach(app -> app.setStatus(ApplicationStatus.SHORTLISTED));
         applicationRepository.saveAll(applications);
@@ -37,6 +37,7 @@ public class AdminWorkflowService {
 
     @Transactional
     public void rejectApplicant(Long applicationId) {
+        if (applicationId == null) return;
         Application application = applicationRepository.findById(applicationId)
                 .orElseThrow(() -> new RuntimeException("Application not found"));
         application.setStatus(ApplicationStatus.REJECTED);
@@ -46,8 +47,10 @@ public class AdminWorkflowService {
     @Transactional
     public List<InterviewRound> scheduleInterviews(BulkInterviewRequest request) {
         List<InterviewRound> rounds = request.getInterviews().stream().map(req -> {
-            Application application = applicationRepository.findById(req.getApplicationId())
-                    .orElseThrow(() -> new RuntimeException("Application not found for ID: " + req.getApplicationId()));
+            Long appId = req.getApplicationId();
+            if (appId == null) throw new RuntimeException("Application ID cannot be null");
+            Application application = applicationRepository.findById(appId)
+                    .orElseThrow(() -> new RuntimeException("Application not found for ID: " + appId));
             
             InterviewRound round = new InterviewRound();
             round.setApplication(application);
@@ -58,13 +61,15 @@ public class AdminWorkflowService {
             return round;
         }).collect(Collectors.toList());
 
-        return interviewRepository.saveAll(rounds);
+        List<InterviewRound> savedRounds = interviewRepository.saveAll(rounds);
+        return savedRounds;
     }
 
     @Transactional
     public void releaseOffers(BulkActionRequest request) {
+        if (request.getApplicationIds() == null || request.getApplicationIds().isEmpty()) return;
         List<Application> applications = applicationRepository.findAllById(request.getApplicationIds());
-        applications.forEach(app -> app.setStatus(ApplicationStatus.OFFERED));
+        applications.forEach(app -> app.setStatus(ApplicationStatus.OFFER));
         applicationRepository.saveAll(applications);
     }
 }

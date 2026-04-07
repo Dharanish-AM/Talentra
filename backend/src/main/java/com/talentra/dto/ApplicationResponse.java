@@ -22,8 +22,8 @@ public class ApplicationResponse {
         resp.setId(app.getId().toString());
         resp.setStatus(app.getStatus().name().toLowerCase());
         
-        if (app.getStudentProfile() != null) {
-            resp.setStudentId(app.getStudentProfile().getId().toString());
+        if (app.getStudentProfile() != null && app.getStudentProfile().getUser() != null) {
+            resp.setStudentId(app.getStudentProfile().getUser().getId().toString());
             resp.setResumeUrl(app.getStudentProfile().getResumeUrl());
             if (app.getStudentProfile().getUser() != null) {
                 resp.setStudentName(app.getStudentProfile().getUser().getName());

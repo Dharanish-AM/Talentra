@@ -14,9 +14,7 @@ export default function ApplicationsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
 
-  const myApps = applications.filter((a) => a.studentId === user?.id);
-
-  const filteredApps = myApps.filter((app) => {
+  const filteredApps = applications.filter((app) => {
     const matchSearch =
       app.companyName.toLowerCase().includes(search.toLowerCase()) ||
       app.driveName.toLowerCase().includes(search.toLowerCase());
@@ -27,7 +25,7 @@ export default function ApplicationsPage() {
   const [visibleCount, setVisibleCount] = useState(10);
   const visibleApps = filteredApps.slice(0, visibleCount);
 
-  const uniqueStatuses = ["all", ...new Set(myApps.map((a) => a.status))];
+  const uniqueStatuses = ["all", ...new Set(applications.map((a) => a.status))];
 
   return (
     <div>
@@ -53,6 +51,7 @@ export default function ApplicationsPage() {
           "interview",
           "selected",
           "rejected",
+          "offer",
         ].map((s) => (
           <button
             key={s}

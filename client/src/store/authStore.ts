@@ -29,7 +29,9 @@ export const useAuthStore = create<AuthState>((set) => ({
   login: async (email: string, password: string) => {
     set({ isLoading: true, error: null });
     try {
-      const { user } = await authApi.login(email, password);
+      const { user, token } = await authApi.login(email, password);
+      // Normalize role
+      user.role = user.role.toLowerCase() as UserRole;
       set({ user, isAuthenticated: true, isLoading: false });
       return true;
     } catch (error) {
@@ -49,7 +51,9 @@ export const useAuthStore = create<AuthState>((set) => ({
   ) => {
     set({ isLoading: true, error: null });
     try {
-      const { user } = await authApi.register({ name, email, password, role });
+      const { user, token } = await authApi.register({ name, email, password, role });
+      // Normalize role
+      user.role = user.role.toLowerCase() as UserRole;
       set({ user, isAuthenticated: true, isLoading: false });
       return true;
     } catch (error) {
@@ -73,6 +77,8 @@ export const useAuthStore = create<AuthState>((set) => ({
     if (token && userStr) {
       try {
         const user = JSON.parse(userStr);
+        // Normalize role
+        user.role = user.role.toLowerCase() as UserRole;
         set({ user, isAuthenticated: true, isInitialized: true });
       } catch {
         authApi.logout();

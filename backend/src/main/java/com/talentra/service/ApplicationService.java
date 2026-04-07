@@ -87,4 +87,8 @@ public class ApplicationService {
     public List<Application> getShortlistedApplicationsByStatus() {
         return applicationRepository.findByStatus(ApplicationStatus.SHORTLISTED);
     }
+
+    public List<Application> getApplicationsByStatuses(List<ApplicationStatus> statuses) {
+        return applicationRepository.findByStatusIn(statuses);
+    }
 }

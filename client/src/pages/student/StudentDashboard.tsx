@@ -13,12 +13,11 @@ import { Button } from "@/components/ui/button";
 export default function StudentDashboard() {
   const { user } = useAuthStore();
   const { applications, drives } = useDataStore();
-  const myApps = applications.filter((a) => a.studentId === user?.id);
   const activeDrives = drives.filter((d) => d.status === "active");
   const [selectedDrive, setSelectedDrive] = useState<JobDrive | null>(null);
 
   const [visibleAppsCount, setVisibleAppsCount] = useState(5);
-  const visibleApps = myApps.slice(0, visibleAppsCount);
+  const visibleApps = applications.slice(0, visibleAppsCount);
 
   const [visibleDrivesCount, setVisibleDrivesCount] = useState(4);
   const visibleDrives = activeDrives.slice(0, visibleDrivesCount);
@@ -39,13 +38,13 @@ export default function StudentDashboard() {
         />
         <StatCard
           label="Applications"
-          value={myApps.length}
+          value={applications.length}
           icon={<FileText className="h-5 w-5" />}
           delay={100}
         />
         <StatCard
           label="Shortlisted"
-          value={myApps.filter((a) => a.status === "shortlisted").length}
+          value={applications.filter((a) => a.status === "shortlisted").length}
           icon={<CheckCircle className="h-5 w-5" />}
           trend="up"
           change="+1 this week"
@@ -53,7 +52,7 @@ export default function StudentDashboard() {
         />
         <StatCard
           label="Interviews"
-          value={myApps.filter((a) => a.status === "interview").length}
+          value={applications.filter((a) => a.status === "interview").length}
           icon={<Clock className="h-5 w-5" />}
           delay={300}
         />
@@ -103,7 +102,7 @@ export default function StudentDashboard() {
               ))}
             </tbody>
           </table>
-          {visibleAppsCount < myApps.length && (
+          {visibleAppsCount < applications.length && (
             <div className="border-t border-border p-4 flex justify-center">
               <Button
                 variant="ghost"
@@ -114,7 +113,7 @@ export default function StudentDashboard() {
               </Button>
             </div>
           )}
-          {myApps.length === 0 && (
+          {applications.length === 0 && (
             <div className="p-12 text-center text-sm text-muted-foreground border-t border-border">
               No applications yet. Explore active drives!
             </div>

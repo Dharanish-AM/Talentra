@@ -9,7 +9,8 @@ import java.util.List;
 
 @Data
 public class JobDriveResponse {
-    private Long id;
+    private String id;
+    private String companyId;
     private String companyName;
     private String title;
     private String role;
@@ -34,20 +35,38 @@ public class JobDriveResponse {
 
     public static JobDriveResponse fromEntity(JobProfile job) {
         JobDriveResponse resp = new JobDriveResponse();
-        resp.setId(job.getId());
-        resp.setCompanyName(job.getCompany() != null ? job.getCompany().getName() : "Unknown");
+        resp.setId(job.getId().toString());
+        if (job.getCompany() != null) {
+            resp.setCompanyId(job.getCompany().getId().toString());
+            resp.setCompanyName(job.getCompany().getName());
+        } else {
+            resp.setCompanyName("Unknown");
+        }
         resp.setTitle(job.getTitle());
         resp.setRole(job.getTitle());
         resp.setDescription(job.getDescription());
         resp.setPackageStr(job.getSalary() != null ? job.getSalary().toString() : "N/A");
         resp.setLocation(job.getLocation());
-        resp.setStatus("active");
-        resp.setApplicantCount(job.getApplications() != null ? job.getApplications().size() : 0);
-        
         if (job.getPostedAt() != null) {
-            resp.setDriveDate(job.getPostedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-            resp.setDeadline(job.getPostedAt().plusDays(7).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            java.time.LocalDateTime postedAt = job.getPostedAt();
+            java.time.LocalDateTime deadline = postedAt.plusDays(7);
+            java.time.LocalDateTime now = java.time.LocalDateTime.now();
+            
+            resp.setDriveDate(postedAt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            resp.setDeadline(deadline.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            
+            if (now.isBefore(postedAt)) {
+                resp.setStatus("upcoming");
+            } else if (now.isBefore(deadline)) {
+                resp.setStatus("active");
+            } else {
+                resp.setStatus("completed");
+            }
+        } else {
+            resp.setStatus("active");
         }
+        
+        resp.setApplicantCount(job.getApplications() != null ? job.getApplications().size() : 0);
 
         Eligibility el = new Eligibility();
         el.setMinCgpa(job.getMinCgpa() != null ? job.getMinCgpa() : 0.0);

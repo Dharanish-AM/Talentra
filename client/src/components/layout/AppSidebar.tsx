@@ -40,7 +40,7 @@ export default function AppSidebar() {
   const { user, logout } = useAuthStore();
   const location = useLocation();
 
-  const role = user?.role?.toLowerCase();
+  const role = user?.role;
   const links =
     role === "admin"
       ? adminLinks
@@ -59,7 +59,7 @@ export default function AppSidebar() {
           <h1 className="font-display text-lg font-bold tracking-tight text-sidebar-accent-foreground">
             Talentra
           </h1>
-          <p className="text-xs text-sidebar-foreground/60 capitalize">
+          <p className="text-xs font-semibold uppercase text-sidebar-foreground/60">
             {user?.role} Portal
           </p>
         </div>

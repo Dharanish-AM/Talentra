@@ -25,7 +25,7 @@ public class InterviewResponse {
         InterviewResponse resp = new InterviewResponse();
         resp.setId(round.getId().toString());
         resp.setDriveId(round.getApplication().getJobProfile().getId().toString());
-        resp.setStudentId(round.getApplication().getStudentProfile().getId().toString());
+        resp.setStudentId(round.getApplication().getStudentProfile().getUser().getId().toString());
         resp.setStudentName(round.getApplication().getStudentProfile().getUser().getName());
         resp.setStudentEmail(round.getApplication().getStudentProfile().getUser().getEmail());
         resp.setDriveTitle(round.getApplication().getJobProfile().getTitle());

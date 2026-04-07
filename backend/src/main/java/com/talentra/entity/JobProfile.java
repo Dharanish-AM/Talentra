@@ -47,6 +47,8 @@ public class JobProfile {
 
     @PrePersist
     protected void onCreate() {
-        postedAt = LocalDateTime.now();
+        if (postedAt == null) {
+            postedAt = LocalDateTime.now();
+        }
     }
 }

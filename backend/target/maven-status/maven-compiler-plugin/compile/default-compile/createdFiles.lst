@@ -31,6 +31,7 @@ com/talentra/dto/ApplicationRequest.class
 com/talentra/repository/StudentProfileRepository.class
 com/talentra/config/DataSeeder.class
 com/talentra/entity/Company.class
+com/talentra/config/DataSeeder$1.class
 com/talentra/dto/BulkActionRequest.class
 com/talentra/repository/JobProfileRepository.class
 com/talentra/dto/JobDriveResponse.class

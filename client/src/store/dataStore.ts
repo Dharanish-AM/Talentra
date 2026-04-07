@@ -31,7 +31,7 @@ interface DataState {
 
   fetchApplications: () => Promise<void>;
   fetchAllApplications: () => Promise<void>;
-  applyToDrive: (driveId: string) => Promise<boolean>;
+  applyToDrive: (driveId: string) => Promise<{ success: boolean; message?: string }>;
   updateApplicationStatus: (
     appId: string,
     status: ApplicationStatus,
@@ -249,14 +249,14 @@ export const useDataStore = create<DataState>((set, get) => ({
         ),
         isLoading: false,
       }));
-      return true;
+      return { success: true };
     } catch (error) {
+      const message = error instanceof Error ? error.message : "Failed to apply to drive";
       set({
-        error:
-          error instanceof Error ? error.message : "Failed to apply to drive",
+        error: message,
         isLoading: false,
       });
-      return false;
+      return { success: false, message };
     }
   },
 

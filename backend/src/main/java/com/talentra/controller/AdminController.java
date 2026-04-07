@@ -212,6 +212,17 @@ public class AdminController {
         workflowService.releaseOffers(request);
         return ResponseEntity.ok(ApiResponse.success(null, "Offers released successfully"));
     }
+    
+    @PostMapping("/feedback/{id}")
+    public ResponseEntity<?> provideFeedback(@PathVariable Long id, @RequestBody java.util.Map<String, String> request) {
+        InterviewRound round = interviewRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Interview round not found"));
+        round.setFeedback(request.get("feedback"));
+        interviewRepository.save(round);
+        java.util.Map<String, Object> response = new HashMap<>();
+        response.put("interview", InterviewResponse.fromEntity(round));
+        return ResponseEntity.ok(ApiResponse.success(response, "Feedback submitted successfully"));
+    }
 
     @GetMapping("/analytics/export")
     public ResponseEntity<byte[]> exportAnalytics() {

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { formatDate } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import { formatDate, formatCurrency } from "@/lib/utils";
 import { useDataStore } from "@/store/dataStore";
 import PageHeader from "@/components/shared/PageHeader";
 import StatCard from "@/components/shared/StatCard";
@@ -21,7 +21,20 @@ import { Button } from "@/components/ui/button";
 import DashboardAnalytics from "@/components/admin/DashboardAnalytics";
 
 export default function AdminDashboard() {
-  const { drives, applications, companies } = useDataStore();
+  const {
+    drives,
+    applications,
+    companies,
+    fetchDrives,
+    fetchAllApplications,
+    fetchCompanies,
+  } = useDataStore();
+
+  useEffect(() => {
+    fetchDrives();
+    fetchAllApplications();
+    fetchCompanies();
+  }, [fetchDrives, fetchAllApplications, fetchCompanies]);
   const [showCreate, setShowCreate] = useState(false);
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
   const [isExporting, setIsExporting] = useState(false);
@@ -163,7 +176,7 @@ export default function AdminDashboard() {
                     {drive.role}
                   </td>
                   <td className="px-6 py-4 text-sm font-medium text-foreground">
-                    {drive.package}
+                    {formatCurrency(drive.package)}
                   </td>
                   <td className="px-6 py-4">
                     <StatusBadge status={drive.status} />

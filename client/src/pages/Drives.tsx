@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { formatDate } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import { formatDate, formatCurrency } from "@/lib/utils";
 import { useDataStore } from "@/store/dataStore";
 import { useAuthStore } from "@/store/authStore";
 import PageHeader from "@/components/shared/PageHeader";
@@ -13,7 +13,13 @@ import { Plus } from "lucide-react";
 
 export default function DrivesPage() {
   const { user } = useAuthStore();
-  const { drives, applications } = useDataStore();
+  const { drives, applications, fetchDrives, fetchApplications } =
+    useDataStore();
+
+  useEffect(() => {
+    fetchDrives();
+    fetchApplications();
+  }, [fetchDrives, fetchApplications]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [selectedDrive, setSelectedDrive] = useState<JobDrive | null>(null);
@@ -94,7 +100,7 @@ export default function DrivesPage() {
             </p>
             <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
               <span className="rounded bg-muted px-2 py-1">
-                💰 {drive.package}
+                💰 {formatCurrency(drive.package)}
               </span>
               <span className="rounded bg-muted px-2 py-1">
                 📍 {drive.location}

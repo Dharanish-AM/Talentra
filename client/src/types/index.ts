@@ -34,6 +34,7 @@ export interface Company {
   industry: string;
   website?: string;
   description: string;
+  contactEmail?: string;
 }
 
 export interface EligibilityCriteria {

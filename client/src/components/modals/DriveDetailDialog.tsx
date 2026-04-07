@@ -11,7 +11,7 @@ import { JobDrive } from "@/types";
 import { useAuthStore } from "@/store/authStore";
 import { useDataStore } from "@/store/dataStore";
 import { toast } from "@/hooks/use-toast";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatCurrency } from "@/lib/utils";
 
 interface Props {
   open: boolean;
@@ -35,8 +35,8 @@ export default function DriveDetailDialog({
 
   const handleApply = async () => {
     if (!user) return;
-    const success = await applyToDrive(drive.id);
-    if (success) {
+    const result = await applyToDrive(drive.id);
+    if (result.success) {
       toast({
         title: "Application submitted!",
         description: `You applied to ${drive.companyName} — ${drive.role}`,
@@ -44,8 +44,8 @@ export default function DriveDetailDialog({
       onOpenChange(false);
     } else {
       toast({
-        title: "Already applied",
-        description: "You have already applied to this drive.",
+        title: "Application Failed",
+        description: result.message || "Failed to apply to drive.",
         variant: "destructive",
       });
     }
@@ -62,7 +62,7 @@ export default function DriveDetailDialog({
           <div className="flex items-center gap-3">
             <StatusBadge status={drive.status} />
             <span className="text-sm text-muted-foreground">
-              {drive.applicantCount} applicants
+              {drive.applicantCount} {drive.applicantCount === 1 ? "applicant" : "applicants"}
             </span>
           </div>
           <p className="text-sm text-muted-foreground">{drive.description}</p>
@@ -73,7 +73,7 @@ export default function DriveDetailDialog({
             </div>
             <div>
               <span className="font-medium text-foreground">Package:</span>{" "}
-              <span className="text-muted-foreground">{drive.package}</span>
+              <span className="text-muted-foreground">{formatCurrency(drive.package)}</span>
             </div>
             <div>
               <span className="font-medium text-foreground">Location:</span>{" "}

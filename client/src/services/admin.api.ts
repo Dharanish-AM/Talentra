@@ -175,6 +175,18 @@ export const adminApi = {
       throw new Error(handleApiError(error));
     }
   },
+  
+  async submitFeedback(interviewId: string, feedback: string): Promise<InterviewSlot> {
+    try {
+      const response = await api.post<ApiResponse<{ interview: InterviewSlot }>>(
+        `/admin/feedback/${interviewId}`,
+        { feedback }
+      );
+      return response.data.data.interview;
+    } catch (error) {
+      throw new Error(handleApiError(error));
+    }
+  },
 
   async getAnalytics(): Promise<Analytics> {
     try {

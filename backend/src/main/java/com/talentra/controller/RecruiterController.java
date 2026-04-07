@@ -73,14 +73,18 @@ public class RecruiterController {
     @PatchMapping("/applications/{id}/status")
     public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestParam ApplicationStatus status) {
         Application application = applicationService.updateApplicationStatus(id, status);
-        return ResponseEntity.ok(ApiResponse.success(application, "Status updated"));
+        java.util.Map<String, Object> data = new java.util.HashMap<>();
+        data.put("application", RecruiterApplicationResponse.fromEntity(application));
+        return ResponseEntity.ok(ApiResponse.success(data, "Status updated"));
     }
 
     @PreAuthorize("hasRole('RECRUITER') or hasRole('ADMIN')")
     @PostMapping("/interviews/schedule")
     public ResponseEntity<?> scheduleInterview(@RequestBody InterviewRequest request) {
         InterviewRound round = interviewService.scheduleInterview(request);
-        return ResponseEntity.ok(ApiResponse.success(round, "Interview scheduled"));
+        java.util.Map<String, Object> data = new java.util.HashMap<>();
+        data.put("interview", RecruiterCandidateResponse.fromEntity(round));
+        return ResponseEntity.ok(ApiResponse.success(data, "Interview scheduled"));
     }
 
     @PreAuthorize("hasRole('RECRUITER') or hasRole('ADMIN')")
@@ -88,7 +92,7 @@ public class RecruiterController {
     public ResponseEntity<?> provideFeedback(@PathVariable Long id, @RequestBody java.util.Map<String, String> request) {
         InterviewRound round = interviewService.updateFeedback(id, request.get("feedback"));
         java.util.Map<String, Object> data = new java.util.HashMap<>();
-        data.put("interview", round);
+        data.put("interview", RecruiterCandidateResponse.fromEntity(round));
         return ResponseEntity.ok(ApiResponse.success(data, "Feedback submitted"));
     }
 
@@ -110,7 +114,7 @@ public class RecruiterController {
             applicationService.updateApplicationStatus(round.getApplication().getId(), status);
         }
         java.util.Map<String, Object> data = new java.util.HashMap<>();
-        data.put("interview", round);
+        data.put("interview", RecruiterCandidateResponse.fromEntity(round));
         return ResponseEntity.ok(ApiResponse.success(data, "Result updated"));
     }
 }

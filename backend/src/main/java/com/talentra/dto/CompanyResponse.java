@@ -11,6 +11,7 @@ public class CompanyResponse {
     private String logo;
     private String website;
     private String description;
+    private String contactEmail;
 
     public static CompanyResponse fromEntity(Company company) {
         CompanyResponse resp = new CompanyResponse();
@@ -20,6 +21,7 @@ public class CompanyResponse {
         resp.setLogo(company.getLogo());
         resp.setWebsite(company.getWebsite());
         resp.setDescription(company.getDescription());
+        resp.setContactEmail(company.getContactEmail());
         return resp;
     }
 }

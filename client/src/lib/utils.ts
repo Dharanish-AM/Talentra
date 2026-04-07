@@ -26,3 +26,15 @@ export function formatDate(dateValue: string | number | Date): string {
   if (isNaN(date.getTime())) return String(dateValue);
   return format(date, "MMM dd, yyyy");
 }
+
+export function formatCurrency(amount: string | number): string {
+  if (amount === "N/A" || !amount) return "N/A";
+  const num = typeof amount === "string" ? parseFloat(amount) : amount;
+  if (isNaN(num)) return String(amount);
+  
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(num);
+}

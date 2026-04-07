@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { formatDate } from "@/lib/utils";
 import { useDataStore } from "@/store/dataStore";
 import { useAuthStore } from "@/store/authStore";
@@ -14,7 +14,18 @@ import { toast } from "@/hooks/use-toast";
 
 export default function RecruiterDashboard() {
   const { user } = useAuthStore();
-  const { applications, interviews, updateInterviewResult } = useDataStore();
+  const {
+    applications,
+    interviews,
+    updateInterviewResult,
+    fetchInterviews,
+    fetchRecruiterApplications,
+  } = useDataStore();
+
+  useEffect(() => {
+    fetchInterviews();
+    fetchRecruiterApplications();
+  }, [fetchInterviews, fetchRecruiterApplications]);
   const shortlisted = applications.filter(
     (a) => a.status === "shortlisted" || a.status === "interview",
   );

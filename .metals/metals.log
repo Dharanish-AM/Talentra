@@ -7764,3 +7764,90 @@ WARNING: Unmatched cancel notification for request id 625
 2026.04.07 11:20:09 INFO  time: compiled talentra-backend in 0.78s
 2026.04.07 11:20:21 INFO  compiling talentra-backend (1 java source)
 2026.04.07 11:20:21 INFO  time: compiled talentra-backend in 0.64s
+2026.04.07 15:48:51 INFO  compiling talentra-backend (53 java sources)
+2026.04.07 15:48:53 INFO  compiling talentra-backend-test (1 java source)
+2026.04.07 15:48:53 INFO  time: compiled talentra-backend in 2.2s
+2026.04.07 15:48:53 INFO  time: compiled talentra-backend-test in 0.7s
+2026.04.07 15:57:22 INFO  compiling talentra-backend (1 java source)
+2026.04.07 15:57:22 INFO  time: compiled talentra-backend in 0.59s
+2026.04.07 15:57:22 INFO  compiling talentra-backend (1 java source)
+2026.04.07 15:57:23 INFO  time: compiled talentra-backend in 0.63s
+2026.04.07 16:00:49 INFO  compiling talentra-backend (1 java source)
+2026.04.07 16:00:49 INFO  time: compiled talentra-backend in 0.86s
+2026.04.07 16:05:49 INFO  compiling talentra-backend (1 java source)
+2026.04.07 16:05:49 INFO  time: compiled talentra-backend in 0.66s
+2026.04.07 16:06:00 INFO  compiling talentra-backend (1 java source)
+2026.04.07 16:06:01 INFO  time: compiled talentra-backend in 1.09s
+2026.04.07 19:34:20 INFO  compiling talentra-backend (1 java source)
+2026.04.07 19:34:20 WARN  Could not load snapshot text for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/config/DataSeeder.java
+2026.04.07 19:34:20 INFO  time: compiled talentra-backend in 0.95s
+2026.04.07 19:35:12 INFO  compiling talentra-backend (1 java source)
+2026.04.07 19:35:13 INFO  time: compiled talentra-backend in 1.03s
+2026.04.07 20:08:38 INFO  compiling talentra-backend (1 java source)
+2026.04.07 20:08:38 INFO  time: compiled talentra-backend in 0.9s
+2026.04.07 20:25:29 INFO  compiling talentra-backend (2 java sources)
+2026.04.07 20:25:29 INFO  time: compiled talentra-backend in 0.86s
+2026.04.07 20:25:29 INFO  compiling talentra-backend-test (1 java source)
+2026.04.07 20:25:30 WARN  javac exited with exit code 1
+2026.04.07 20:25:30 INFO  time: compiled talentra-backend-test in 0.51s
+Apr 07, 2026 8:25:56 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.04.07 20:31:51 INFO  compiling talentra-backend (53 java sources)
+2026.04.07 20:31:53 INFO  compiling talentra-backend-test (2 java sources)
+2026.04.07 20:31:53 INFO  time: compiled talentra-backend in 1.54s
+2026.04.07 20:31:53 WARN  javac exited with exit code 1
+2026.04.07 20:31:53 INFO  time: compiled talentra-backend-test in 0.59s
+2026.04.07 20:39:49 INFO  compiling talentra-backend-test (3 java sources)
+2026.04.07 20:39:49 WARN  javac exited with exit code 1
+2026.04.07 20:39:49 INFO  time: compiled talentra-backend-test in 0.74s
+2026.04.07 20:40:03 INFO  compiling talentra-backend-test (4 java sources)
+2026.04.07 20:40:03 WARN  javac exited with exit code 1
+2026.04.07 20:40:03 INFO  time: compiled talentra-backend-test in 0.69s
+2026.04.07 20:40:21 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 20:40:21 WARN  javac exited with exit code 1
+2026.04.07 20:40:21 INFO  time: compiled talentra-backend-test in 0.72s
+2026.04.07 20:40:22 INFO  compiling talentra-backend-test (6 java sources)
+2026.04.07 20:40:22 WARN  javac exited with exit code 1
+2026.04.07 20:40:22 INFO  time: compiled talentra-backend-test in 0.69s
+2026.04.07 20:40:35 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 20:40:35 WARN  javac exited with exit code 1
+2026.04.07 20:40:35 WARN  Invalid text document uri received from build server: file:///Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/test/java/com/talentra/e2e/LoginTest.java
+2026.04.07 20:40:35 INFO  time: compiled talentra-backend-test in 0.64s
+2026.04.07 20:59:20 INFO  compiling talentra-backend (53 java sources)
+2026.04.07 20:59:22 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 20:59:22 INFO  time: compiled talentra-backend in 1.73s
+2026.04.07 20:59:22 WARN  javac exited with exit code 1
+2026.04.07 20:59:22 INFO  time: compiled talentra-backend-test in 0.76s
+2026.04.07 20:59:26 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 20:59:26 WARN  javac exited with exit code 1
+2026.04.07 20:59:26 INFO  time: compiled talentra-backend-test in 0.64s
+2026.04.07 20:59:32 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 20:59:32 WARN  javac exited with exit code 1
+2026.04.07 20:59:32 INFO  time: compiled talentra-backend-test in 0.65s
+2026.04.07 20:59:34 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 20:59:34 WARN  javac exited with exit code 1
+2026.04.07 20:59:34 INFO  time: compiled talentra-backend-test in 0.66s
+2026.04.07 21:04:05 INFO  compiling talentra-backend (53 java sources)
+2026.04.07 21:04:07 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 21:04:07 INFO  time: compiled talentra-backend in 1.54s
+2026.04.07 21:04:07 WARN  javac exited with exit code 1
+2026.04.07 21:04:07 INFO  time: compiled talentra-backend-test in 0.68s
+2026.04.07 21:04:16 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 21:04:16 WARN  javac exited with exit code 1
+2026.04.07 21:04:16 INFO  time: compiled talentra-backend-test in 0.62s
+2026.04.07 21:04:23 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 21:04:23 WARN  javac exited with exit code 1
+2026.04.07 21:04:23 INFO  time: compiled talentra-backend-test in 0.68s
+2026.04.07 21:04:31 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 21:04:31 WARN  javac exited with exit code 1
+2026.04.07 21:04:31 INFO  time: compiled talentra-backend-test in 0.68s
+2026.04.07 21:07:46 INFO  compiling talentra-backend (53 java sources)
+2026.04.07 21:07:47 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 21:07:47 INFO  time: compiled talentra-backend in 1.63s
+2026.04.07 21:07:47 WARN  javac exited with exit code 1
+2026.04.07 21:07:47 INFO  time: compiled talentra-backend-test in 0.64s
+2026.04.07 21:11:15 INFO  compiling talentra-backend (53 java sources)
+2026.04.07 21:11:17 INFO  compiling talentra-backend-test (5 java sources)
+2026.04.07 21:11:17 INFO  time: compiled talentra-backend in 1.72s
+2026.04.07 21:11:18 WARN  javac exited with exit code 1
+2026.04.07 21:11:18 INFO  time: compiled talentra-backend-test in 1.08s

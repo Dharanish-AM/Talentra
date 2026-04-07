@@ -51,6 +51,11 @@ public class ApplicationService {
             }
         }
 
+        applicationRepository.findByStudentProfileIdAndJobProfileId(student.getId(), job.getId())
+                .ifPresent(app -> {
+                    throw new RuntimeException("Already applied to this drive");
+                });
+
         Application application = new Application();
         application.setStudentProfile(student);
         application.setJobProfile(job);

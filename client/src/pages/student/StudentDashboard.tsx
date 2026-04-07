@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { formatDate } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import { formatDate, formatCurrency } from "@/lib/utils";
 import { useDataStore } from "@/store/dataStore";
 import { useAuthStore } from "@/store/authStore";
 import PageHeader from "@/components/shared/PageHeader";
@@ -12,7 +12,13 @@ import { Button } from "@/components/ui/button";
 
 export default function StudentDashboard() {
   const { user } = useAuthStore();
-  const { applications, drives } = useDataStore();
+  const { applications, drives, fetchApplications, fetchEligibleDrives } =
+    useDataStore();
+
+  useEffect(() => {
+    fetchApplications();
+    fetchEligibleDrives();
+  }, [fetchApplications, fetchEligibleDrives]);
   const activeDrives = drives.filter((d) => d.status === "active");
   const [selectedDrive, setSelectedDrive] = useState<JobDrive | null>(null);
 
@@ -142,7 +148,7 @@ export default function StudentDashboard() {
                 <StatusBadge status={drive.status} />
               </div>
               <div className="mt-3 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                <span>💰 {drive.package}</span>
+                <span>💰 {formatCurrency(drive.package)}</span>
                 <span>📍 {drive.location}</span>
                 <span>📅 Deadline: {formatDate(drive.deadline)}</span>
               </div>

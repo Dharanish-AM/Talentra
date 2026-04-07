@@ -7653,3 +7653,19 @@ WARNING: Unmatched cancel notification for request id 18
 2026.04.06 19:14:17 INFO  time: compiled talentra-backend in 0.62s
 2026.04.06 21:12:11 INFO  compiling talentra-backend (51 java sources)
 2026.04.06 21:12:12 INFO  time: compiled talentra-backend in 1.58s
+2026.04.07 08:49:00 INFO  compiling talentra-backend (2 java sources)
+Apr 07, 2026 8:49:02 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 173
+2026.04.07 08:49:02 INFO  time: compiled talentra-backend in 1.26s
+2026.04.07 08:49:02 INFO  compiling talentra-backend (2 java sources)
+2026.04.07 08:49:02 INFO  compiling talentra-backend-test (1 java source)
+2026.04.07 08:49:02 INFO  time: compiled talentra-backend in 0.88s
+2026.04.07 08:49:03 INFO  time: compiled talentra-backend-test in 0.68s
+Apr 07, 2026 8:51:20 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 205
+Apr 07, 2026 8:53:29 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 225
+Apr 07, 2026 8:54:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 275
+Apr 07, 2026 9:01:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 319

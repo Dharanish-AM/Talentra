@@ -7851,3 +7851,56 @@ INFO: Unsupported notification method: $/setTrace
 2026.04.07 21:11:17 INFO  time: compiled talentra-backend in 1.72s
 2026.04.07 21:11:18 WARN  javac exited with exit code 1
 2026.04.07 21:11:18 INFO  time: compiled talentra-backend-test in 1.08s
+2026.04.07 21:21:53 INFO  Shutting down server
+2026.04.07 21:21:53 INFO  Memory monitor stopped
+2026.04.07 21:21:53 INFO  shutting down Metals
+2026.04.07 21:21:54 INFO  Shut down connection with build server.
+2026.04.07 21:21:53 INFO  Exiting server
+2026.05.07 09:11:38 INFO  Started: Metals version 1.6.7 in folders '/Users/dharanisham/Developer/Github-Repositories/Talentra' for client Visual Studio Code 1.119.0.
+2026.05.07 09:11:38 INFO  Memory monitor started
+2026.05.07 09:11:38 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.05.07 09:11:38 INFO  no build target found for /Users/dharanisham/Developer/Github-Repositories/Talentra/backend/src/main/java/com/talentra/controller/StudentController.java. Using fallback presentation compiler.
+2026.05.07 09:11:40 INFO  Attempting to connect to the build server...
+2026.05.07 09:11:40 INFO  Found a Bloop server running
+2026.05.07 09:11:40 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/bsp.trace.json or /Users/dharanisham/Library/Caches/org.scalameta.metals/bsp.trace.json
+2026.05.07 09:11:40 INFO  time: Connected to build server in 0.22s
+2026.05.07 09:11:40 INFO  Connected to Build server: Bloop v2.0.19
+May 07, 2026 9:11:41 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8
+May 07, 2026 9:11:41 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9
+May 07, 2026 9:11:41 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10
+2026.05.07 09:11:43 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+May 07, 2026 9:11:44 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 16
+2026.05.07 09:11:45 INFO  time: indexed workspace in 4.89s
+2026.05.07 09:11:45 INFO  compiling talentra-backend (53 java sources)
+2026.05.07 09:11:49 INFO  compiling talentra-backend-test (5 java sources)
+2026.05.07 09:11:49 INFO  time: compiled talentra-backend in 4.29s
+2026.05.07 09:11:51 WARN  javac exited with exit code 1
+2026.05.07 09:11:51 INFO  time: compiled talentra-backend-test in 1.19s
+May 07, 2026 9:12:36 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+May 07, 2026 9:12:37 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.05.07 09:13:16 INFO  Shutting down server
+2026.05.07 09:13:16 INFO  Memory monitor stopped
+2026.05.07 09:13:16 INFO  shutting down Metals
+2026.05.07 09:13:17 INFO  Shut down connection with build server.
+2026.05.07 09:13:16 INFO  Exiting server
+2026.05.07 09:13:24 INFO  Started: Metals version 1.6.7 in folders '/Users/dharanisham/Developer/Github-Repositories/Talentra' for client Visual Studio Code 1.119.0.
+2026.05.07 09:13:24 INFO  Memory monitor started
+2026.05.07 09:13:25 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.05.07 09:13:25 INFO  Attempting to connect to the build server...
+2026.05.07 09:13:25 INFO  Found a Bloop server running
+2026.05.07 09:13:25 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/dharanisham/Developer/Github-Repositories/Talentra/.metals/bsp.trace.json or /Users/dharanisham/Library/Caches/org.scalameta.metals/bsp.trace.json
+2026.05.07 09:13:25 INFO  time: Connected to build server in 0.21s
+2026.05.07 09:13:25 INFO  Connected to Build server: Bloop v2.0.19
+2026.05.07 09:13:28 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.05.07 09:13:28 INFO  time: indexed workspace in 3.46s
+2026.05.07 10:12:02 INFO  Shutting down server
+2026.05.07 10:12:02 INFO  Memory monitor stopped
+2026.05.07 10:12:02 INFO  shutting down Metals
+2026.05.07 10:12:03 INFO  Shut down connection with build server.
+2026.05.07 10:12:02 INFO  Exiting server
